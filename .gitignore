@@ -3,9 +3,10 @@ dist
 .astro
 .vercel
 
-# Thư mục ảnh gốc: web dùng bản đã chép vào src/assets
-Feedback/
-Software/
-Thông tin Duy-Founder/
-Đội ngũ GV/
-evad-logo-ngang.png
+# Thư mục ảnh gốc ở thư mục ngoài cùng: web dùng bản đã chép vào src/assets.
+# Dấu / ở đầu để không bỏ qua nhầm src/assets/feedback, src/assets/software.
+/Feedback/
+/Software/
+/Thông tin Duy-Founder/
+/Đội ngũ GV/
+/evad-logo-ngang.png
