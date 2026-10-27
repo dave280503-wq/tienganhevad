@@ -1,0 +1,70 @@
+---
+import '@fontsource-variable/plus-jakarta-sans';
+import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
+import { getImage } from 'astro:assets';
+import logo from '../assets/evad-logo-ngang.png';
+import site from '../content/site.json';
+import founder from '../content/founder.json';
+import TopBar from '../components/TopBar.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import StickyCta from '../components/StickyCta.astro';
+import ZaloFab from '../components/ZaloFab.astro';
+
+interface Props { title: string; description?: string; schema?: object[]; }
+const { title, description = site.description, schema = [] } = Astro.props;
+const fullTitle = title === site.name ? `${site.name} | ${site.tagline}` : `${title} | ${site.name}`;
+const og = await getImage({ src: logo, width: 1200, format: 'png' });
+const icon = await getImage({ src: logo, width: 64, format: 'png' });
+const ogUrl = Astro.site ? new URL(og.src, Astro.site).href : og.src;
+
+const organization = {
+  '@context': 'https://schema.org',
+  '@type': 'EducationalOrganization',
+  name: site.name,
+  description: site.description,
+  founder: { '@type': 'Person', name: founder.name },
+  knowsLanguage: 'vi',
+};
+const jsonLd = [organization, ...schema];
+---
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#091a3d" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="vi_VN" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogUrl} />
+    <meta name="twitter:card" content="summary" />
+    <link rel="icon" href={icon.src} />
+    {jsonLd.map((item) => <script type="application/ld+json" set:html={JSON.stringify(item)} />)}
+    <ClientRouter />
+  </head>
+  <body class="pb-24 md:pb-0">
+    <a href="#main" class="sr-only fixed left-4 top-4 z-[60] rounded-full bg-gold px-5 py-3 font-bold text-deep focus:not-sr-only">Bỏ qua điều hướng</a>
+    <div id="progress" class="fixed left-0 top-0 z-50 h-[3px] w-full bg-gradient-to-r from-glow to-gold" aria-hidden="true"></div>
+    <TopBar />
+    <Header />
+    <main id="main"><slot /></main>
+    <Footer />
+    <StickyCta />
+    <ZaloFab />
+    <div id="cursor" aria-hidden="true"></div>
+    <!-- Xem ảnh phóng to: mọi phần tử có data-zoom đều mở hộp này -->
+    <dialog id="lightbox" class="m-auto max-h-[92vh] max-w-[94vw] overflow-auto rounded-3xl bg-surface p-0 text-ink shadow-lift">
+      <button type="button" data-close aria-label="Đóng ảnh" class="sticky left-full top-3 z-10 float-right mr-3 mt-3 grid size-10 place-items-center rounded-full bg-deep/80 text-xl font-bold text-heading backdrop-blur transition active:scale-90">×</button>
+      <img src="" alt="" class="block h-auto max-h-[92vh] w-auto max-w-full" />
+    </dialog>
+    <script>
+      import '../scripts/fx';
+    </script>
+  </body>
+</html>

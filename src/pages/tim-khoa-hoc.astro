@@ -1,0 +1,45 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import CourseRow from '../components/CourseRow.astro';
+import PageHero from '../components/PageHero.astro';
+import cover from '../assets/founder/duy-work.jpg';
+import CtaBand from '../components/CtaBand.astro';
+import site from '../content/site.json';
+import { inTier } from '../lib';
+
+const courses = (await getCollection('courses')).sort((a, b) => a.data.order - b.data.order);
+const tiers = site.budgetTiers.map((t) => ({ ...t, courses: courses.filter((c) => inTier(c.data, t)) }));
+---
+<Base title="Tìm khóa học theo ngân sách" description="Chọn mức học phí mỗi buổi để xem các khóa học Evad English phù hợp.">
+  <PageHero title="Tìm khóa học hợp ngân sách" lead="Chọn mức bạn muốn chi cho mỗi buổi học, các khóa phù hợp hiện ngay bên dưới." cover={cover} coverPosition="70% 40%">
+      <div class="mt-9 grid gap-3 sm:grid-cols-3" role="group" aria-label="Mức học phí mỗi buổi">
+        {tiers.map((t, i) => (
+          <button type="button" data-tier={t.id} aria-pressed={i === 0 ? 'true' : 'false'}
+            class="rounded-3xl bg-surface/80 p-5 text-left shadow-card ring-2 ring-sky/20 backdrop-blur transition duration-200 hover:-translate-y-1 hover:ring-azure/60 aria-pressed:bg-azure aria-pressed:text-white aria-pressed:ring-gold">
+            <span class="block text-3xl font-extrabold tracking-tight">{t.label}</span>
+            <span class="mt-1 block text-sm opacity-70">{t.unit}</span>
+            <span class="mt-4 inline-flex rounded-full bg-baby px-3 py-1 text-xs font-bold text-heading">{t.courses.length} khóa phù hợp</span>
+          </button>
+        ))}
+      </div>
+  </PageHero>
+
+  <div class="sheet theme-light">
+  <div class="wrap section !pt-12" aria-live="polite">
+    {tiers.map((t) => (
+      <section data-panel={t.id} aria-label={`Khóa học ${t.label} ${t.unit}`}>
+        <h2 class="h-section">Khóa học {t.label} {t.unit}</h2>
+        {t.courses.length ? (
+          <ul class="mt-8 grid gap-4">
+            {t.courses.map((c) => <CourseRow course={c} variant="budget" />)}
+          </ul>
+        ) : (
+          <p class="placeholder mt-6">Chưa có khóa nào ở mức này. Nhắn Zalo để được tư vấn.</p>
+        )}
+      </section>
+    ))}
+  </div>
+  <CtaBand />
+  </div>
+</Base>

@@ -1,0 +1,11 @@
+node_modules
+dist
+.astro
+.vercel
+
+# Thư mục ảnh gốc: web dùng bản đã chép vào src/assets
+Feedback/
+Software/
+Thông tin Duy-Founder/
+Đội ngũ GV/
+evad-logo-ngang.png

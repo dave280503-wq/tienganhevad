@@ -1,0 +1,35 @@
+---
+// Dải ảnh chụp tin nhắn chạy ngang. Bấm vào ảnh để phóng to.
+import { Image } from 'astro:assets';
+import { loadReviews } from '../reviews';
+
+interface Props { compact?: boolean; }
+const { compact = false } = Astro.props;
+const reviews = await loadReviews();
+const tilt = ['-rotate-2', 'rotate-1', '-rotate-1', 'rotate-2'];
+---
+<div class="ticker py-8" role="region" aria-label="Ảnh chụp tin nhắn của học viên">
+  <div class="ticker-track items-center">
+    {[0, 1].map((copy) => (
+      <ul class:list={['flex items-center gap-3', copy === 1 && 'ticker-dup']} aria-hidden={copy === 1 ? 'true' : undefined}>
+        {reviews.map((r, i) => (
+          <li class="shrink-0 px-2">
+            <button type="button" data-zoom={r.full} data-alt={`Tin nhắn của ${r.author}`} tabindex={copy === 1 ? -1 : undefined}
+              aria-label={`Phóng to tin nhắn của ${r.author}`}
+              class={`block rounded-[1.75rem] bg-white p-2 text-left shadow-[0_24px_50px_-20px_rgb(0_0_0/0.75)] transition duration-300 hover:-translate-y-1.5 hover:rotate-0 ${compact ? 'w-52 sm:w-56' : 'w-64 sm:w-72'} ${tilt[i % tilt.length]}`}>
+              <span class="block overflow-hidden rounded-[1.3rem] bg-[#eef2f8]">
+                <Image src={r.screenshot} alt="" width={340}
+                  class={r.wide ? 'block h-auto w-full' : `block w-full object-cover object-top ${compact ? 'h-36 sm:h-40' : 'h-52 sm:h-56'}`} loading="lazy" />
+              </span>
+              <span class="flex items-center gap-2.5 px-2 pb-1 pt-3">
+                <span class="grid size-8 shrink-0 place-items-center rounded-full bg-[#2f6fe0] text-xs font-extrabold text-white" aria-hidden="true">{r.initial}</span>
+                <span class="truncate text-sm font-bold text-[#06214f]">{r.author}</span>
+                <svg class="ml-auto size-5 shrink-0 text-[#e5484d]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.1 0 3.6 1.1 5.3 3 1.7-1.9 3.2-3 5.3-3 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21z" /></svg>
+              </span>
+            </button>
+          </li>
+        ))}
+      </ul>
+    ))}
+  </div>
+</div>

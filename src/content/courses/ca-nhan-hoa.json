@@ -1,0 +1,31 @@
+{
+  "order": 4,
+  "title": "Chương trình học cá nhân hóa",
+  "summary": "Mọi đầu vào, mọi nhu cầu: định cư, du học, làm sale, thuyết trình... Học đúng thứ bạn cần.",
+  "audience": "Mọi đầu vào",
+  "cover": "../../assets/founder/duy-my.jpg",
+  "coverPosition": "center 15%",
+  "highlights": ["Kèm 1-1 với giáo viên", "Mọi đầu vào", "Lộ trình thiết kế riêng", "Tư vấn 1-1 trước khi học"],
+  "priceType": "contact",
+  "budgetMin": 300000,
+  "budgetMax": 500000,
+  "entryLevel": "Mọi đầu vào",
+  "entry": [
+    "Bất cứ nhu cầu gì về học tiếng Anh: định cư, du học, làm sale, thuyết trình..."
+  ],
+  "outcome": [
+    "Được hỗ trợ cực chuyên sâu, học đúng thứ bạn cần"
+  ],
+  "roadmap": [
+    {
+      "title": "Lộ trình thiết kế riêng",
+      "items": [
+        "Liên hệ để được tư vấn 1-1 và lên kế hoạch lộ trình"
+      ]
+    }
+  ],
+  "feeNotes": [
+    "Học phí 300–500k/buổi tùy nhu cầu",
+    "Liên hệ để được tư vấn"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "intro": "Evad English bắt đầu “có hình có dạng” từ đầu năm 2026, khi Duy, người sáng lập, quyết định trở về Việt Nam. Duy dùng thế mạnh của mình là tiếng Anh thực tế để xây dựng một nơi giúp học viên có hứng học hơn, cùng một đội ngũ giáo viên cực kỳ chất lượng.",
+  "differences": [
+    {
+      "title": "Không nhận học viên tràn lan",
+      "text": "Tùy trình độ và nhu cầu của bạn, Evad English mới sắp xếp giáo viên và lớp học phù hợp."
+    },
+    {
+      "title": "Giáo trình đổi theo bạn",
+      "text": "Trong quá trình học, giáo trình được điều chỉnh và cải tiến để hợp với bạn hơn."
+    },
+    {
+      "title": "Luôn lắng nghe",
+      "text": "Học kèm 1-1 nên giáo viên luôn lắng nghe và thay đổi cách dạy cho từng học viên."
+    }
+  ],
+  "teachers": {
+    "intro": "Các giáo viên ở Evad English đều có:",
+    "qualities": [
+      "Kinh nghiệm giảng dạy",
+      "Bằng cấp tiếng Anh xịn xò",
+      "Được đào tạo bài bản để dạy ngoại ngữ",
+      "Được kiểm tra đầu vào rất khắt khe để đảm bảo chất lượng"
+    ]
+  }
+}

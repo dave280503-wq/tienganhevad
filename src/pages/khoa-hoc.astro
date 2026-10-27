@@ -1,0 +1,22 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import CourseRow from '../components/CourseRow.astro';
+import CtaBand from '../components/CtaBand.astro';
+import cover from '../assets/founder/duy-teaching.jpg';
+
+const courses = (await getCollection('courses')).sort((a, b) => a.data.order - b.data.order);
+---
+<Base title="Các khóa học" description="5 khóa học tiếng Anh giao tiếp của Evad English: nền tảng, hàng ngày, công việc, cá nhân hóa và tự học có hướng dẫn.">
+  <PageHero title="Các khóa học" cover={cover} coverPosition="center 25%"
+    lead="Chọn khóa gần với mục tiêu của bạn nhất rồi bấm Xem chi tiết. Chưa chắc chọn khóa nào thì nhắn Zalo, bên mình sẽ tư vấn." />
+  <div class="sheet theme-light">
+    <div class="wrap section !pb-8">
+      <ul class="grid gap-5 md:grid-cols-2 lg:grid-cols-6">
+        {courses.map((c) => <CourseRow course={c} />)}
+      </ul>
+    </div>
+    <CtaBand />
+  </div>
+</Base>

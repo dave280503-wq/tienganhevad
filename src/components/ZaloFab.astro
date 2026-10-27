@@ -1,0 +1,11 @@
+---
+import { ctaHref, ctaExternal } from '../lib';
+---
+<a href={ctaHref} target={ctaExternal ? '_blank' : undefined} rel={ctaExternal ? 'noopener' : undefined}
+  class="fixed bottom-6 right-6 z-30 hidden items-center gap-3 rounded-full bg-gold py-3 pl-5 pr-6 font-bold text-deep shadow-[0_12px_32px_-8px_rgb(251_207_110/0.6)] transition duration-200 hover:-translate-y-1 hover:bg-gold-deep active:scale-95 md:flex">
+  <span class="relative grid size-3 place-items-center" aria-hidden="true">
+    <span class="absolute inset-0 animate-ping rounded-full bg-deep/40"></span>
+    <span class="relative size-2.5 rounded-full bg-deep"></span>
+  </span>
+  Nhắn Zalo
+</a>

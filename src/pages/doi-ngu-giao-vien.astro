@@ -1,0 +1,39 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import team from '../assets/team/team-group.jpg';
+import about from '../content/about.json';
+
+const check = 'M5 12l5 5L20 7';
+---
+<Base title="Đội ngũ giáo viên" description="Giáo viên Evad English có kinh nghiệm giảng dạy, bằng cấp tiếng Anh và được đào tạo bài bản để dạy ngoại ngữ.">
+  <PageHero title="Đội ngũ giáo viên" cover={team} coverPosition="center 30%"
+    lead="Các giáo viên Evad English trong ngày nhận chứng chỉ TESOL." />
+  <div class="sheet theme-light">
+    <div class="wrap section !pb-8">
+      <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-16">
+        <div>
+          <h2 class="h-section">{about.teachers.intro}</h2>
+          <ul class="mt-8 grid gap-3">
+            {about.teachers.qualities.map((q) => (
+              <li class="flex items-center gap-4 rounded-2xl bg-white p-4 pr-6 text-lg font-bold text-heading ring-1 ring-sky/40">
+                <span class="grid size-10 shrink-0 place-items-center rounded-full bg-azure text-white" aria-hidden="true">
+                  <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d={check} /></svg>
+                </span>
+                {q}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <figure>
+          <div class="overflow-hidden rounded-[2rem] shadow-lift">
+            <Image src={team} alt="Đội ngũ giáo viên Evad English cầm chứng chỉ TESOL" width={1100} class="h-auto w-full" />
+          </div>
+          <figcaption class="mt-3 text-sm font-semibold text-ink/70">Ngày nhận chứng chỉ TESOL</figcaption>
+        </figure>
+      </div>    </div>
+    <CtaBand />
+  </div>
+</Base>

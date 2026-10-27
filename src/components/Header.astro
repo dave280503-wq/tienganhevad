@@ -1,0 +1,24 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/evad-logo-dark.png';
+import { ctaHref, ctaExternal, nav } from '../lib';
+
+const path = Astro.url.pathname.replace(/\/$/, '');
+const current = (href: string) => (path === href || path.startsWith(`${href}/`) ? 'page' : undefined);
+---
+<!-- h-0: thanh nổi đè lên hero, không chiếm chỗ. Các mục menu nằm cùng thanh với logo; màn hình hẹp thì vuốt ngang. -->
+<header class="sticky top-3 z-30 h-0 px-3 sm:px-5">
+  <div class="mx-auto flex h-14 max-w-6xl items-center gap-2 rounded-full bg-surface/80 pl-4 pr-2 shadow-[0_10px_30px_-12px_rgb(2_8_24/0.8)] ring-1 ring-sky/40 backdrop-blur-md sm:h-16 sm:gap-3 sm:pl-5">
+    <a href="/" aria-label="Evad English, trang chủ" class="shrink-0 transition-transform hover:scale-105 active:scale-95">
+      <Image src={logo} alt="Evad English" width={132} height={30} loading="eager" class="h-auto w-[92px] sm:w-[124px] xl:w-[136px]" />
+    </a>
+    <nav class="nav-row flex min-w-0 flex-1 items-center gap-0.5 overflow-x-auto lg:justify-center" aria-label="Chính">
+      {nav.map((n) => (
+        <a href={n.href} aria-current={current(n.href)}
+          class="shrink-0 whitespace-nowrap rounded-full px-3 py-2 text-[0.8rem] font-semibold text-ink/80 transition duration-200 hover:bg-baby hover:text-heading active:scale-95 aria-[current=page]:bg-azure aria-[current=page]:text-white sm:text-sm xl:px-4">{n.label}</a>
+      ))}
+    </nav>
+    <a href={ctaHref} target={ctaExternal ? '_blank' : undefined} rel={ctaExternal ? 'noopener' : undefined}
+      class="btn btn-cta hidden !min-h-11 shrink-0 !px-6 text-sm sm:inline-flex">Đăng ký</a>
+  </div>
+</header>

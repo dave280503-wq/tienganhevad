@@ -1,0 +1,19 @@
+---
+interface Props { words: string[]; }
+const { words } = Astro.props;
+---
+<!-- Dải chữ lớn chạy ngang, chỉ để trang trí -->
+<div class="overflow-hidden py-8 sm:py-10" aria-hidden="true">
+  <div class="marquee">
+    {[0, 1].map(() => (
+      <ul class="flex shrink-0 items-center">
+        {words.map((w) => (
+          <li class="flex items-center">
+            <span class="stroke-text px-6 text-5xl font-extrabold tracking-tight sm:px-10 sm:text-7xl">{w}</span>
+            <span class="text-3xl text-gold sm:text-5xl">✦</span>
+          </li>
+        ))}
+      </ul>
+    ))}
+  </div>
+</div>

@@ -1,0 +1,48 @@
+{
+  "name": "Evad English",
+  "tagline": "Học tiếng Anh giao tiếp 1-1 online",
+  "description": "Evad English dạy tiếng Anh giao tiếp 1-1 online cho người Việt: người mất gốc, người đi làm, sinh viên và phụ huynh.",
+  "zaloUrl": "https://zalo.me/0985946824",
+  "zaloNote": "Mọi nút Nhắn Zalo / Đăng ký mở link zaloUrl. Ảnh QR ở src/assets/zalo-qr.jpg hiện trên trang /lien-he.",
+  "budgetTiers": [
+    {
+      "id": "duoi-100k",
+      "label": "Dưới 100k",
+      "unit": "mỗi buổi",
+      "min": 0,
+      "max": 99999
+    },
+    {
+      "id": "100-200k",
+      "label": "100 – 200k",
+      "unit": "mỗi buổi",
+      "min": 100000,
+      "max": 200000
+    },
+    {
+      "id": "300-500k",
+      "label": "300 – 500k",
+      "unit": "mỗi buổi",
+      "min": 300000,
+      "max": 500000
+    }
+  ],
+  "_statsNote": "Ô đầu tiên có ảnh nền, ô thứ hai hiện thanh đo theo value/10, ô thứ ba hiện các chấm theo số học viên.",
+  "stats": [
+    {
+      "value": 6,
+      "suffix": " năm",
+      "label": "sống, làm việc và kinh doanh ở Mỹ"
+    },
+    {
+      "value": 10,
+      "suffix": "/10",
+      "label": "độ thực chiến tiếng Anh"
+    },
+    {
+      "value": 40,
+      "suffix": "+",
+      "label": "học viên và trainee đã được kèm"
+    }
+  ]
+}

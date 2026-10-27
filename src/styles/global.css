@@ -1,0 +1,277 @@
+@import "tailwindcss";
+
+@theme {
+  /* Nền: xanh đêm sáng hơn bản trước, vẫn tối và sâu */
+  --color-mist: #091a3d;      /* nền trang */
+  --color-deep: #061330;      /* dải tối nhất, chữ trên nút vàng */
+  --color-surface: #102a5e;   /* thẻ, thanh điều hướng */
+  --color-baby: #183774;      /* bề mặt nổi hơn: chip, hover */
+  --color-royal: #0f4bb8;     /* khối CTA */
+  /* Chữ */
+  --color-ink: #dfeaff;       /* nội dung */
+  --color-heading: #f5f9ff;   /* tiêu đề */
+  /* Xanh nhấn */
+  --color-sky: #5c93f0;       /* viền, chấm trang trí */
+  --color-azure: #2f6fe0;     /* nền nút/bong bóng, chữ trắng đọc được */
+  --color-glow: #8fc0ff;      /* chữ nhấn, link */
+  /* Nhấn CTA lấy từ tua nón trên logo */
+  --color-gold: #fbcf6e;
+  --color-gold-deep: #f5b93a;
+  --font-sans: "Plus Jakarta Sans Variable", ui-sans-serif, system-ui, sans-serif;
+  --shadow-card: 0 14px 36px -16px rgb(2 8 24 / 0.7);
+  --shadow-lift: 0 0 0 1px rgb(92 147 240 / 0.45), 0 26px 60px -24px rgb(47 111 224 / 0.7);
+}
+
+@layer base {
+  html { scroll-behavior: smooth; color-scheme: dark; }
+  [id] { scroll-margin-top: 6.5rem; }
+  body { @apply bg-mist font-sans text-ink antialiased; font-feature-settings: "ss01"; }
+  h1, h2, h3 { @apply text-heading; font-weight: 800; letter-spacing: -0.025em; line-height: 1.12; }
+  :focus-visible { outline: 3px solid var(--color-glow); outline-offset: 3px; border-radius: 8px; }
+  ::selection { background: var(--color-azure); color: white; }
+}
+
+@layer components {
+  .btn { @apply relative inline-flex min-h-12 items-center justify-center overflow-hidden whitespace-nowrap rounded-full px-7 text-base font-bold transition duration-200 active:scale-95; }
+  .btn-cta { @apply bg-gold text-deep shadow-[0_8px_28px_-8px_rgb(251_207_110/0.6)] hover:-translate-y-0.5 hover:bg-gold-deep; }
+  .btn-ghost { @apply text-heading ring-2 ring-sky/50 hover:bg-baby hover:ring-glow; }
+  .wrap { @apply mx-auto w-full max-w-6xl px-5 sm:px-8; }
+  .section { @apply py-16 sm:py-24; }
+  .h-display { @apply text-[2.5rem] sm:text-6xl lg:text-7xl; letter-spacing: -0.035em; line-height: 1.03; }
+  .h-page { @apply text-4xl sm:text-6xl; letter-spacing: -0.03em; animation: rise 0.8s cubic-bezier(.2,.7,.2,1) both; }
+  .h-section { @apply text-3xl sm:text-4xl; }
+  .lead { @apply max-w-xl text-lg leading-relaxed text-ink/80 sm:text-xl; }
+  .card { @apply relative rounded-3xl bg-surface shadow-card ring-1 ring-sky/25; }
+  .bubble { @apply max-w-[85%] px-4 py-3 text-[0.95rem] font-medium leading-snug; border-radius: 1.25rem; }
+  .bubble-in { @apply self-start rounded-bl-md bg-baby text-ink ring-1 ring-sky/30; }
+  .bubble-out { @apply self-end rounded-br-md bg-azure text-white; }
+  .placeholder { @apply rounded-2xl border-2 border-dashed border-sky/50 bg-baby/40 p-5 text-sm text-ink/70; }
+  .chip { @apply inline-flex items-center rounded-full bg-baby px-3 py-1 text-xs font-bold text-glow; }
+}
+
+/* ---------- Chuyển động ---------- */
+@keyframes rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+@keyframes pop { 0% { transform: scale(0.94); } 60% { transform: scale(1.03); } 100% { transform: scale(1); } }
+@keyframes menu-in { from { opacity: 0; transform: translateY(-10px) scale(0.98); } to { opacity: 1; transform: none; } }
+@keyframes zoom-in { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: none; } }
+@keyframes ripple { to { transform: scale(4); opacity: 0; } }
+@keyframes drift { 0%, 100% { transform: translate3d(0, 0, 0) scale(1); } 50% { transform: translate3d(-6%, 8%, 0) scale(1.15); } }
+@keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
+@keyframes flow { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
+
+/* Hero chat: từng tin nhắn hiện lần lượt */
+.msg { opacity: 0; transform: translateY(10px) scale(0.98); animation: msg-in 0.45s cubic-bezier(.2,.8,.3,1) forwards; animation-delay: var(--d, 0s); }
+@keyframes msg-in { to { opacity: 1; transform: none; } }
+
+/* Tiêu đề hero hiện từng chữ */
+.word { display: inline-block; opacity: 0; animation: rise 0.7s cubic-bezier(.2,.7,.2,1) forwards; animation-delay: calc(var(--i) * 70ms + 120ms); }
+
+/* Hiện dần khi cuộn tới (chỉ bật khi JS chạy) */
+html.js .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.7s cubic-bezier(.2,.7,.2,1), transform 0.7s cubic-bezier(.2,.7,.2,1); transition-delay: var(--d, 0ms); }
+html.js .reveal.in { opacity: 1; transform: none; }
+
+/* Đổi mức giá ở tab 5: khối khóa học trượt vào lần lượt */
+.panel-in li { animation: rise 0.5s cubic-bezier(.2,.7,.2,1) both; }
+.panel-in li:nth-child(2) { animation-delay: 70ms; }
+.panel-in li:nth-child(3) { animation-delay: 140ms; }
+.panel-in li:nth-child(4) { animation-delay: 210ms; }
+.panel-in li:nth-child(5) { animation-delay: 280ms; }
+.panel-in h2 { animation: rise 0.45s cubic-bezier(.2,.7,.2,1) both; }
+[data-tier][aria-pressed="true"] { animation: pop 0.4s ease-out; }
+
+#menu:not([hidden]) { animation: menu-in 0.28s cubic-bezier(.2,.8,.3,1); }
+#lightbox[open] { animation: zoom-in 0.3s cubic-bezier(.2,.8,.3,1); }
+#lightbox::backdrop { background: rgb(4 10 28 / 0.82); backdrop-filter: blur(6px); }
+
+/* Thẻ sáng lên theo con trỏ chuột */
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+  background: radial-gradient(340px circle at var(--mx, 50%) var(--my, 50%), rgb(143 192 255 / 0.18), transparent 65%);
+}
+.card:hover::after { opacity: 1; }
+
+/* Nút vàng: vệt sáng quét qua + gợn sóng khi bấm */
+.btn-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 0.6) 50%, transparent 70%);
+  transform: translateX(-130%);
+}
+.btn-cta:hover::before { transform: translateX(130%); transition: transform 0.7s ease; }
+.ripple { position: absolute; border-radius: 9999px; background: rgb(255 255 255 / 0.45); transform: scale(0); animation: ripple 0.6s ease-out forwards; pointer-events: none; }
+
+.bounce { animation: bob 1.8s ease-in-out infinite; }
+.flow-bg { background-size: 200% 100%; animation: flow 8s linear infinite; }
+
+/* Thanh tiến độ cuộn trang */
+#progress { transform: scaleX(0); transform-origin: left; }
+
+/* Nền hero: ánh sáng xanh trôi chậm và lưới mờ */
+.hero-bg {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(48rem 26rem at 80% -8%, rgb(47 111 224 / 0.55), transparent 62%),
+    radial-gradient(36rem 22rem at 0% 30%, rgb(92 147 240 / 0.28), transparent 60%),
+    linear-gradient(180deg, #0c2352 0%, #091a3d 100%);
+}
+.hero-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgb(143 192 255 / 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(143 192 255 / 0.08) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse at 50% 0%, black 10%, transparent 70%);
+}
+.hero-bg::after {
+  content: "";
+  position: absolute;
+  width: 34rem;
+  height: 34rem;
+  right: -8rem;
+  top: -6rem;
+  pointer-events: none;
+  border-radius: 9999px;
+  background: radial-gradient(closest-side, rgb(79 140 255 / 0.45), transparent);
+  filter: blur(30px);
+  animation: drift 14s ease-in-out infinite;
+}
+.hero-bg > * { position: relative; z-index: 1; }
+
+/* Đầu các trang con: cùng nền với hero, thêm chỗ cho ảnh chìm */
+.page-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    radial-gradient(40rem 24rem at 0% 20%, rgb(92 147 240 / 0.25), transparent 60%),
+    linear-gradient(180deg, #0c2352 0%, #091a3d 100%);
+}
+
+/* Bảng điện chạy */
+.ticker { overflow: hidden; }
+.ticker-track { display: flex; width: max-content; gap: 0.75rem; animation: ticker 70s linear infinite; }
+.ticker:hover .ticker-track, .ticker:focus-within .ticker-track { animation-play-state: paused; }
+@keyframes ticker { to { transform: translateX(calc(-50% - 0.375rem)); } }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  .msg, .word { opacity: 1; }
+  html.js .reveal { opacity: 1; transform: none; }
+  .ticker { overflow-x: auto; }
+  .ticker-track { animation: none; }
+  .ticker-dup { display: none; }
+}
+
+/* ---------- Phần nội dung sáng: tờ giấy bo góc đè lên hero tối ---------- */
+.theme-light {
+  --color-mist: #f3f8ff;
+  --color-surface: #ffffff;
+  --color-baby: #e4eefe;
+  --color-ink: #1a2f5e;
+  --color-heading: #06214f;
+  --color-glow: #1f5fd6;
+  --color-sky: #9ac5ff;
+  --shadow-card: 0 18px 40px -22px rgb(9 40 110 / 0.4);
+  --shadow-lift: 0 0 0 1px rgb(31 95 214 / 0.25), 0 30px 60px -28px rgb(31 95 214 / 0.5);
+  background: var(--color-mist);
+  color: var(--color-ink);
+}
+.sheet {
+  position: relative;
+  z-index: 2;
+  margin-top: -2.5rem;
+  border-radius: 2.5rem 2.5rem 0 0;
+}
+
+/* ---------- Kiểu portfolio trẻ trung ---------- */
+.stroke-text { color: transparent; -webkit-text-stroke: 1.5px rgb(143 192 255 / 0.75); }
+.marquee { display: flex; width: max-content; animation: marquee 45s linear infinite; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+.sticker { animation: bob 3.2s ease-in-out infinite; }
+
+[data-tilt] { transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform 0.25s ease-out; will-change: transform; }
+
+#cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 3;
+  width: 400px;
+  height: 400px;
+  border-radius: 9999px;
+  pointer-events: none;
+  background: radial-gradient(closest-side, rgb(79 140 255 / 0.22), transparent);
+  mix-blend-mode: screen;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+@media (pointer: fine) { #cursor { opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee { animation: none; }
+  #cursor { display: none; }
+}
+
+.btn-primary { background: var(--color-azure); color: #fff; box-shadow: 0 10px 24px -12px rgb(47 111 224 / 0.9); }
+.btn-primary:hover { translate: 0 -2px; background: #2563d6; }
+
+/* FAQ: nội dung mở ra mượt */
+details[open] .faq-body { animation: rise 0.35s cubic-bezier(.2,.7,.2,1); }
+
+/* Ảnh bìa trang khóa học: hiện dần và thu nhẹ khi tải trang */
+.cover-in { animation: cover-in 1.6s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes cover-in { from { opacity: 0; scale: 1.08; } to { opacity: 1; scale: 1; } }
+
+/* Menu trên thanh logo: màn hình hẹp thì vuốt ngang, hai mép mờ dần để báo còn mục */
+.nav-row { scrollbar-width: none; }
+.nav-row::-webkit-scrollbar { display: none; }
+@media (max-width: 1023.98px) {
+  .nav-row { mask-image: linear-gradient(90deg, transparent, black 0.75rem, black calc(100% - 1.5rem), transparent); }
+}
+
+/* Khối tối nằm trong tờ sáng: trả lại bộ màu tối */
+.theme-dark {
+  --color-mist: #091a3d;
+  --color-surface: #102a5e;
+  --color-baby: #183774;
+  --color-ink: #dfeaff;
+  --color-heading: #f5f9ff;
+  --color-glow: #8fc0ff;
+  --color-sky: #5c93f0;
+  --shadow-card: 0 14px 36px -16px rgb(2 8 24 / 0.7);
+  background: var(--color-mist);
+  color: var(--color-ink);
+}
+
+/* Thanh đo 10/10 trên trang chủ: từng vạch sáng lần lượt */
+.meter-seg { animation: seg-in 0.5s ease-out both; animation-delay: calc(var(--i) * 90ms + 0.3s); }
+@keyframes seg-in { from { opacity: 0.15; scale: 1 0.3; } }
+
+/* Khung hero trang chủ: một vệt sáng chạy chậm dọc viền */
+.hero-window::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  pointer-events: none;
+  background: linear-gradient(110deg, transparent 35%, rgb(143 192 255 / 0.9) 48%, rgb(251 207 110 / 0.8) 52%, transparent 65%) 0 0 / 250% 100%;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: border-sheen 7s linear infinite;
+}
+@keyframes border-sheen { from { background-position: 150% 0; } to { background-position: -150% 0; } }
+@media (prefers-reduced-motion: reduce) { .hero-window::after { animation: none; opacity: 0; } }

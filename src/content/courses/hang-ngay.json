@@ -1,0 +1,57 @@
+{
+  "order": 2,
+  "title": "Nói tiếng Anh hàng ngày",
+  "summary": "Hết ngập ngừng khi nói. Dùng ngay cấu trúc câu, slang và cụm từ tự nhiên trong giao tiếp đời thường.",
+  "audience": "Nền tảng cơ bản (A1–A1+)",
+  "cover": "../../assets/founder/duy-work.jpg",
+  "coverPosition": "70% 40%",
+  "highlights": ["Kèm 1-1 với giáo viên", "Lộ trình 3 tháng", "60 phút mỗi buổi, 2 buổi mỗi tuần", "Đóng học phí theo tháng"],
+  "priceType": "session",
+  "price": 168000,
+  "sessionMinutes": 60,
+  "sessionsPerWeek": 2,
+  "billing": "tháng",
+  "entryLevel": "Nền tảng cơ bản (A1–A1+)",
+  "entry": [
+    "Biết từ vựng nhưng không dùng được",
+    "Không hiểu, không dùng được slang và các cụm thông dụng",
+    "Ngập ngừng khi nói, không ghép được thành câu",
+    "Sai ngữ pháp dẫn đến hiểu lầm khi nói"
+  ],
+  "outcome": [
+    "Có bộ cấu trúc câu và từ theo chủ đề để dùng ngay",
+    "Tự tin giao tiếp bằng các tips đã học",
+    "Dùng đúng ngữ pháp khi nói",
+    "Phát âm chuẩn bản xứ",
+    "Dùng slang và các cụm từ tự nhiên, không sách vở"
+  ],
+  "roadmap": [
+    {
+      "title": "Tháng 1–2: Getting started",
+      "text": "Mỗi tuần được học:",
+      "items": [
+        "1 chủ đề thông dụng, dễ áp dụng",
+        "Các cặp âm IPA dễ gây nhầm lẫn để cải thiện phát âm",
+        "Các chunks và slang dùng ngay trong giao tiếp",
+        "Được nói và sửa trực tiếp ngay trên lớp",
+        "Bài tập và feedback hàng tuần để ôn luyện liên tục",
+        "4 bộ ngữ pháp bổ trợ việc nói tiếng Anh"
+      ]
+    },
+    {
+      "title": "Tháng 3: Advanced",
+      "items": [
+        "Đi chuyên sâu vào các ngữ cảnh giao tiếp hàng ngày",
+        "Bộ toolkit để nâng cấp câu chữ cực xịn xò",
+        "Mài giũa ngữ điệu câu và phát âm",
+        "Các chuyên đề ngữ pháp bổ trợ nói",
+        "Các cặp âm IPA dễ gây nhầm lẫn để mài giũa phát âm"
+      ]
+    }
+  ],
+  "feeNotes": [
+    "Học cùng đội ngũ giáo viên được đào tạo bài bản, mỗi tuần 2 buổi",
+    "Kèm 1-1, lịch học linh động, sắp xếp theo lịch rảnh của học viên",
+    "Đặc biệt: chỉ đóng học phí theo tháng, không đóng cả lộ trình"
+  ]
+}

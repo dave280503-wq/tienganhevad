@@ -1,0 +1,33 @@
+{
+  "order": 5,
+  "title": "Tự học có hướng dẫn",
+  "summary": "Chọn chương trình phù hợp, nhận tài liệu qua phần mềm học, làm bài tập mỗi tuần và được feedback.",
+  "audience": "Tự học, có người chỉ đường",
+  "cover": "../../assets/software/tong-quan.png",
+  "coverPosition": "left top",
+  "highlights": ["Tài liệu trên phần mềm học", "Bài tập mỗi tuần", "Có feedback từ giáo viên"],
+  "priceType": "week",
+  "price": 99000,
+  "roadmap": [
+    {
+      "title": "Chọn chương trình phù hợp",
+      "items": [
+        "Nền tảng tiếng Anh, Nói tiếng Anh hàng ngày hoặc Tiếng Anh chốn công sở"
+      ]
+    },
+    {
+      "title": "Tự học với tài liệu và hướng dẫn",
+      "items": [
+        "Được cung cấp tài liệu qua phần mềm học của lớp",
+        "Được hướng dẫn tự học"
+      ]
+    },
+    {
+      "title": "Ôn luyện và nhận feedback",
+      "items": [
+        "Bài tập ôn luyện mỗi tuần kèm feedback"
+      ]
+    }
+  ],
+  "feeNotes": []
+}

@@ -1,0 +1,32 @@
+---
+// Ba ảnh tin nhắn xếp chồng như những tấm ảnh trên bàn; rê chuột vào thì xòe ra.
+import { Image } from 'astro:assets';
+import type { Review } from '../reviews';
+
+interface Props { reviews: Review[]; compact?: boolean; }
+const { reviews, compact = false } = Astro.props;
+const tall = reviews.filter((r) => !r.wide).slice(0, 2);
+const wide = reviews.find((r) => r.wide);
+const shot = 'absolute block overflow-hidden rounded-[1.6rem] bg-white p-2 shadow-[0_30px_60px_-24px_rgb(0_0_0/0.8)] transition duration-500 ease-out hover:z-20';
+---
+<div class:list={['group relative mx-auto w-full', compact ? 'h-[19rem] max-w-sm sm:h-[21rem]' : 'h-[24rem] max-w-md sm:h-[28rem]']}>
+  {tall[0] && (
+    <button type="button" data-zoom={tall[0].full} data-alt={`Tin nhắn của ${tall[0].author}`} aria-label={`Phóng to tin nhắn của ${tall[0].author}`}
+      class={`${shot} left-0 top-0 w-[52%] -rotate-6 group-hover:-translate-x-4 group-hover:-rotate-[9deg]`}>
+      <Image src={tall[0].screenshot} alt="" width={420} class="aspect-[3/4] w-full rounded-[1.2rem] object-cover object-top" />
+    </button>
+  )}
+  {tall[1] && (
+    <button type="button" data-zoom={tall[1].full} data-alt={`Tin nhắn của ${tall[1].author}`} aria-label={`Phóng to tin nhắn của ${tall[1].author}`}
+      class={`${shot} right-0 top-8 w-[50%] rotate-6 group-hover:translate-x-4 group-hover:rotate-[9deg]`}>
+      <Image src={tall[1].screenshot} alt="" width={420} class="aspect-[3/4] w-full rounded-[1.2rem] object-cover object-top" />
+    </button>
+  )}
+  {wide && (
+    <button type="button" data-zoom={wide.full} data-alt={`Tin nhắn của ${wide.author}`} aria-label={`Phóng to tin nhắn của ${wide.author}`}
+      class={`${shot} bottom-2 left-[8%] z-10 w-[84%] -rotate-2 group-hover:translate-y-3 group-hover:rotate-0`}>
+      <Image src={wide.screenshot} alt="" width={640} class="w-full rounded-[1.2rem]" />
+    </button>
+  )}
+  <span class="sticker absolute -right-2 bottom-24 z-20 rotate-6 rounded-2xl bg-gold px-4 py-2 text-sm font-extrabold text-deep shadow-lg" aria-hidden="true">Tin nhắn thật</span>
+</div>

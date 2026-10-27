@@ -1,0 +1,65 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import { priceLabel, ctaHref, ctaExternal } from '../lib';
+
+interface Props {
+  course: CollectionEntry<'courses'>;
+  /** summary: chỉ thông tin sơ bộ + Xem chi tiết. budget: thêm giá và nút Zalo (dùng ở tab tìm theo ngân sách). */
+  variant?: 'summary' | 'budget';
+}
+const { course, variant = 'summary' } = Astro.props;
+const c = course.data;
+const href = `/khoa-hoc/${course.id}`;
+const price = priceLabel(c);
+const arrow = 'M5 12h14M13 6l6 6-6 6';
+---
+{variant === 'summary' ? (
+  // Hai khóa đầu rộng hơn trên máy tính (lưới 6 cột: 3 + 3, rồi 2 + 2 + 2)
+  <li class:list={['group md:last:odd:col-span-2', c.order <= 2 ? 'lg:col-span-3' : 'lg:col-span-2']}>
+    <a href={href} class="flex h-full flex-col overflow-hidden rounded-[2rem] bg-white shadow-card ring-1 ring-sky/40 transition duration-300 hover:-translate-y-1.5 hover:shadow-lift">
+      <div class="relative isolate h-48 overflow-hidden bg-[#091a3d] sm:h-56">
+        {c.cover && (
+          <Image src={c.cover} alt="" width={720} aria-hidden="true"
+            class="absolute inset-0 -z-10 size-full object-cover opacity-75 grayscale transition duration-700 group-hover:scale-105 group-hover:opacity-95"
+            style={`object-position: ${c.coverPosition}`} />
+        )}
+        <span class="absolute inset-0 -z-10 bg-[#2f6fe0] mix-blend-color" aria-hidden="true"></span>
+        <span class="absolute inset-0 -z-10 bg-gradient-to-t from-[#061330] via-[#061330]/35 to-transparent" aria-hidden="true"></span>
+        <span class="absolute left-5 top-5 rounded-full bg-white/90 px-3 py-1 text-xs font-bold text-[#06214f] backdrop-blur">{c.audience}</span>
+        <h3 class="absolute inset-x-6 bottom-5 text-2xl font-extrabold leading-tight !text-white sm:text-[1.7rem]">{c.title}</h3>
+      </div>
+      <div class="flex flex-1 flex-col p-6">
+        <p class="leading-relaxed text-ink/80">{c.summary}</p>
+        {c.highlights.length > 0 && (
+          <ul class="mt-5 flex flex-wrap gap-2">
+            {c.highlights.slice(0, 3).map((h) => <li class="rounded-full bg-baby px-3 py-1 text-xs font-bold text-heading">{h}</li>)}
+          </ul>
+        )}
+        <span class="mt-auto inline-flex items-center gap-2 pt-6 font-bold text-glow">
+          Xem chi tiết
+          <svg class="size-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={arrow} /></svg>
+        </span>
+      </div>
+    </a>
+  </li>
+) : (
+  <li class="card transition duration-200 hover:-translate-y-1 hover:shadow-lift">
+    <div class="flex flex-col gap-5 p-6 sm:flex-row sm:items-center sm:justify-between sm:gap-10 sm:p-8">
+      <div class="max-w-xl">
+        <span class="chip">{c.audience}</span>
+        <h3 class="mt-3 text-2xl sm:text-3xl">{c.title}</h3>
+        <p class="mt-2 leading-relaxed text-ink/80">{c.summary}</p>
+      </div>
+      <div class="shrink-0 sm:text-right">
+        <p class="text-2xl font-extrabold tracking-tight text-glow">{price.main}</p>
+        {price.note && <p class="mt-1 text-sm text-ink/70">{price.note}</p>}
+        <div class="mt-4 flex flex-col gap-2 sm:items-end">
+          <a href={href} class="btn btn-primary !min-h-11 w-full gap-2 sm:w-auto">Xem chi tiết</a>
+          <a href={ctaHref} target={ctaExternal ? '_blank' : undefined} rel={ctaExternal ? 'noopener' : undefined}
+            class="btn btn-cta !min-h-11 w-full sm:w-auto" data-magnetic>Nhắn Zalo đăng ký / hỏi thêm</a>
+        </div>
+      </div>
+    </div>
+  </li>
+)}

@@ -1,0 +1,227 @@
+---
+import { getCollection } from 'astro:content';
+import { Image, getImage } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import { priceLabel, ctaHref, ctaExternal } from '../../lib';
+import appOverview from '../../assets/software/tong-quan.png';
+import appSchedule from '../../assets/software/lich-hoc.png';
+import appNotes from '../../assets/software/luu-y-thong-ke.png';
+
+export async function getStaticPaths() {
+  const courses = (await getCollection('courses')).sort((a, b) => a.data.order - b.data.order);
+  return courses.map((course) => ({
+    params: { slug: course.id },
+    props: { course, others: courses.filter((c) => c.id !== course.id) },
+  }));
+}
+
+const { course, others } = Astro.props;
+const c = course.data;
+const price = priceLabel(c);
+const hasEntry = Boolean(c.entryLevel || c.entry.length);
+const hasOutcome = c.outcome.length > 0;
+const multiPhase = c.roadmap.length > 1;
+const cta = { href: ctaHref, target: ctaExternal ? '_blank' : undefined, rel: ctaExternal ? 'noopener' : undefined };
+
+const appShots = [
+  { src: appOverview, alt: 'Trang tổng quan: buổi học sắp tới, tiến độ và feedback mới' },
+  { src: appSchedule, alt: 'Lịch học theo tuần, bấm vào buổi học để mở link Teams' },
+  { src: appNotes, alt: 'Lưu ý của giáo viên, tài liệu học và thống kê buổi học' },
+];
+const zoomed = await Promise.all(appShots.map((s) => getImage({ src: s.src, width: 1600 })));
+const appFeatures = [
+  'Xem lịch học và vào lớp Teams chỉ với một lần bấm',
+  'Nhận tài liệu, nộp bài tập về nhà',
+  'Nghe lại feedback ghi âm của giáo viên cho từng bài',
+  'Theo dõi số buổi đã học và tiến độ khóa',
+];
+const check = 'M5 12l5 5L20 7';
+---
+<Base title={c.title} description={c.summary}>
+  <!-- Tiêu đề: ảnh chìm bên phải, nhuộm xanh và tan vào nền -->
+  <header class="relative isolate overflow-hidden bg-mist">
+    {c.cover && (
+      <div class="absolute inset-0 -z-10 lg:left-[38%]" aria-hidden="true">
+        <Image src={c.cover} alt="" widths={[640, 1100, 1600]} sizes="(min-width: 1024px) 62vw, 100vw" loading="eager"
+          class="cover-in size-full object-cover grayscale contrast-125" style={`object-position: ${c.coverPosition}`} />
+        <div class="absolute inset-0 bg-azure mix-blend-color"></div>
+        <div class="absolute inset-0 bg-mist/75 lg:bg-[linear-gradient(90deg,var(--color-mist)_0%,rgb(9_26_61/0.55)_45%,rgb(9_26_61/0.15)_100%)]"></div>
+        <div class="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-mist to-transparent"></div>
+      </div>
+    )}
+    <div class="wrap pb-28 pt-28 sm:pb-36 sm:pt-36">
+      <a href="/khoa-hoc" class="inline-flex items-center gap-2 text-sm font-bold text-glow transition-colors hover:text-heading">
+        <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6" /></svg>
+        Các khóa học
+      </a>
+      <div class="max-w-2xl">
+        <span class="chip mt-8 w-fit">{c.audience}</span>
+        <h1 class="mt-5 text-[2.6rem] font-extrabold leading-[1.05] tracking-tight text-heading sm:text-6xl lg:text-7xl">{c.title}</h1>
+        <p class="mt-6 max-w-xl text-lg leading-relaxed text-ink/85 sm:text-xl">{c.summary}</p>
+        <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+          <a {...cta} class="btn btn-cta" data-magnetic>Nhắn Zalo tư vấn</a>
+          <a href="#lo-trinh" class="btn btn-ghost">Xem lộ trình học</a>
+        </div>
+      </div>
+      {c.highlights.length > 0 && (
+        <ul class="mt-12 grid max-w-3xl gap-x-8 gap-y-3 border-t border-white/15 pt-6 text-[0.95rem] font-semibold text-heading sm:grid-cols-2">
+          {c.highlights.map((h) => (
+            <li class="flex items-center gap-3">
+              <svg class="size-4 shrink-0 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={check} /></svg>
+              {h}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  </header>
+
+  <div class="sheet theme-light">
+    <div class="wrap section space-y-24 sm:space-y-32">
+
+      {(hasEntry || hasOutcome) && (
+        <section aria-labelledby="dau-vao-ra">
+          <h2 id="dau-vao-ra" class="h-section max-w-2xl">Bạn bắt đầu từ đâu, và đi tới đâu</h2>
+          <div class={`mt-10 grid items-stretch gap-4 ${hasEntry && hasOutcome ? 'lg:grid-cols-[1fr_3.5rem_1.15fr]' : ''}`}>
+            {hasEntry && (
+              <div class="rounded-[2rem] bg-white p-7 ring-1 ring-sky/40 sm:p-9">
+                <h3 class="text-base font-bold text-ink/70">Đầu vào: khóa học phù hợp nếu bạn</h3>
+                {c.entryLevel && <p class="mt-3 text-2xl font-extrabold leading-snug text-heading">{c.entryLevel}</p>}
+                {c.entry.length > 0 && (
+                  <ul class="mt-6 grid gap-4">
+                    {c.entry.map((item) => (
+                      <li class="flex items-start gap-3 text-ink/85">
+                        <span class="mt-[0.45rem] size-2.5 shrink-0 rounded-full ring-2 ring-glow/70" aria-hidden="true"></span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            )}
+            {hasEntry && hasOutcome && (
+              <div class="grid place-items-center" aria-hidden="true">
+                <span class="grid size-12 rotate-90 place-items-center rounded-full bg-gold text-deep shadow-card lg:rotate-0">
+                  <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+                </span>
+              </div>
+            )}
+            {hasOutcome && (
+              <div class="relative overflow-hidden rounded-[2rem] bg-[linear-gradient(150deg,#0f2f73,#091a3d_70%)] p-7 text-[#dfeaff] shadow-lift sm:p-9">
+                <div class="pointer-events-none absolute -right-20 -top-20 size-64 rounded-full bg-[#2f6fe0]/40 blur-3xl" aria-hidden="true"></div>
+                <h3 class="relative text-base font-bold !text-[#8fc0ff]">Đầu ra: sau khóa học, bạn sẽ</h3>
+                <ul class="relative mt-6 grid gap-4">
+                  {c.outcome.map((item) => (
+                    <li class="flex items-start gap-3 text-lg font-semibold leading-snug text-white">
+                      <svg class="mt-1 size-5 shrink-0 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={check} /></svg>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
+      {c.roadmap.length > 0 && (
+        <section id="lo-trinh" aria-labelledby="lo-trinh-h">
+          <h2 id="lo-trinh-h" class="h-section">Lộ trình học</h2>
+          <ol class="mt-10 border-t border-sky/40">
+            {c.roadmap.map((phase, i) => (
+              <li class="grid gap-6 border-b border-sky/40 py-9 lg:grid-cols-[19rem_1fr] lg:gap-12">
+                <div class="flex items-start gap-4">
+                  {multiPhase && <span class="text-5xl font-extrabold leading-none text-glow/35">{i + 1}</span>}
+                  <div>
+                    <h3 class="text-2xl font-extrabold leading-tight">{phase.title}</h3>
+                    {phase.text && <p class="mt-2 text-ink/70">{phase.text}</p>}
+                  </div>
+                </div>
+                {phase.items.length > 0 && (
+                  <ul class="grid gap-x-8 gap-y-4 sm:grid-cols-2">
+                    {phase.items.map((item) => (
+                      <li class="flex items-start gap-3 text-ink/90">
+                        <svg class="mt-1 size-4 shrink-0 text-glow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={check} /></svg>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
+          </ol>
+        </section>
+      )}
+
+      <section aria-labelledby="phan-mem" class="relative overflow-hidden rounded-[2.5rem] bg-[#091a3d] px-6 py-12 text-[#dfeaff] sm:px-12 sm:py-16">
+        <div class="pointer-events-none absolute -left-24 bottom-0 size-80 rounded-full bg-[#2f6fe0]/30 blur-3xl" aria-hidden="true"></div>
+        <div class="relative grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
+          <div>
+            <h2 id="phan-mem" class="text-3xl font-extrabold leading-tight !text-white sm:text-4xl">Học trên phần mềm riêng của Evad English</h2>
+            <p class="mt-4 text-lg text-[#dfeaff]/80">Phần mềm chuyên nghiệp, dễ sử dụng. Mọi thứ về việc học của bạn nằm ở một chỗ.</p>
+            <ul class="mt-8 grid gap-4">
+              {appFeatures.map((f) => (
+                <li class="flex items-start gap-3">
+                  <svg class="mt-1 size-4 shrink-0 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={check} /></svg>
+                  <span>{f}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            {appShots.map((shot, i) => (
+              <button type="button" data-zoom={zoomed[i].src} data-alt={shot.alt} aria-label={`Phóng to ảnh: ${shot.alt}`}
+                class={`group overflow-hidden rounded-2xl bg-white ring-1 ring-white/20 transition hover:ring-[#8fc0ff] ${i === 0 ? 'col-span-2' : ''}`}>
+                <Image src={shot.src} alt={shot.alt} widths={[480, 900]} sizes="(min-width: 1024px) 640px, 100vw"
+                  class="block h-auto w-full transition duration-500 group-hover:scale-[1.02]" />
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="hoc-phi" aria-labelledby="hoc-phi-h" class="grid gap-10 rounded-[2.5rem] bg-white p-7 ring-1 ring-sky/40 sm:p-12 lg:grid-cols-[1fr_auto] lg:items-end">
+        <div>
+          <h2 id="hoc-phi-h" class="text-base font-bold text-ink/70">Học phí</h2>
+          <p class="mt-2 text-4xl font-extrabold tracking-tight text-heading sm:text-5xl">{price.main}</p>
+          {price.note && <p class="mt-2 text-ink/75">{price.note}</p>}
+          {c.feeNotes.length > 0 && (
+            <ul class="mt-7 grid gap-3">
+              {c.feeNotes.map((item) => (
+                <li class="flex items-start gap-3">
+                  <svg class="mt-1 size-4 shrink-0 text-glow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={check} /></svg>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+        <div class="flex flex-col gap-3 lg:w-72">
+          <a {...cta} class="btn btn-cta" data-magnetic>Nhắn Zalo đăng ký</a>
+          <a href="/tim-khoa-hoc" class="btn btn-ghost">So sánh theo ngân sách</a>
+        </div>
+      </section>
+
+      <section aria-labelledby="khoa-khac">
+        <h2 id="khoa-khac" class="h-section">Các khóa khác</h2>
+        <ul class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {others.map((o) => (
+            <li>
+              <a href={`/khoa-hoc/${o.id}`} class="group relative isolate flex h-full min-h-44 flex-col justify-end overflow-hidden rounded-3xl bg-[#091a3d] p-5 text-white">
+                {o.data.cover && (
+                  <Image src={o.data.cover} alt="" width={480} aria-hidden="true"
+                    class="absolute inset-0 -z-10 size-full object-cover opacity-45 grayscale transition duration-500 group-hover:scale-105 group-hover:opacity-60"
+                    style={`object-position: ${o.data.coverPosition}`} />
+                )}
+                <span class="absolute inset-0 -z-10 bg-gradient-to-t from-[#061330] via-[#061330]/70 to-[#2f6fe0]/30" aria-hidden="true"></span>
+                <span class="text-xs font-bold text-[#8fc0ff]">{o.data.audience}</span>
+                <span class="mt-1 text-lg font-extrabold leading-tight">{o.data.title}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </div>
+  </div>
+
+</Base>

@@ -1,0 +1,312 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Ticker from '../components/Ticker.astro';
+import ReviewSpotlight from '../components/ReviewSpotlight.astro';
+import Marquee from '../components/Marquee.astro';
+import CourseRow from '../components/CourseRow.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Faq from '../components/Faq.astro';
+import faq from '../content/faq.json';
+import site from '../content/site.json';
+import { ctaHref, ctaExternal } from '../lib';
+import founderData from '../content/founder.json';
+import about from '../content/about.json';
+import duyTeaching from '../assets/founder/duy-teaching.jpg';
+import duyUs from '../assets/founder/duy-my.jpg';
+import duyWork from '../assets/founder/duy-work.jpg';
+import cert from '../assets/founder/tesol-cert.jpg';
+
+const courses = (await getCollection('courses')).sort((a, b) => a.data.order - b.data.order);
+// Ô số liệu: [0] năm ở Mỹ (có ảnh nền), [1] điểm /10 (thanh đo), [2] số học viên (chấm tròn)
+const [years, score, learners] = site.stats;
+// Biểu tượng cho 3 điểm khác biệt: chọn lọc, giáo trình điều chỉnh, lắng nghe
+const diffIcons = [
+  'M4 5h16l-6 8v5l-4 2v-7L4 5z',
+  'M20 12a8 8 0 1 1-2.3-5.6M20 4v4h-4',
+  'M7 18c0-3 1-4 2.5-5.5S12 10 12 8a3 3 0 0 0-6 0M15 7a5 5 0 0 1 0 6M18 4a9 9 0 0 1 0 12',
+];
+// Hội thoại minh họa trong khung hero (D: thầy Duy, B: bạn)
+const chat = [
+  { out: false, d: 0.6, text: 'Hi! Hôm nay mình bắt đầu từ đâu nhỉ?' },
+  { out: true, d: 1.8, text: 'Em lâu rồi không nói tiếng Anh, hơi ngại ạ.' },
+  { out: false, d: 3.1, text: 'Không sao. Học 1-1 nên mình đi chậm hay nhanh đều được.' },
+  { out: true, d: 4.4, text: 'Vậy mình thử câu đầu tiên nha!' },
+];
+const headline = 'Tiếng Anh dùng được ngay, học 1-1 theo nhịp của bạn';
+
+const steps = [
+  { title: 'Nhắn Zalo cho Evad', text: 'Cho biết mục tiêu và ngân sách của bạn.' },
+  { title: 'Chọn khóa phù hợp', text: 'Bên mình tư vấn khóa hợp mục tiêu. Bạn xem chi tiết và học phí trước khi quyết định.' },
+  { title: 'Học 1-1 online', text: 'Một giáo viên kèm một học viên, qua điện thoại hoặc máy tính.' },
+  { title: 'Chỉnh nhịp theo bạn', text: 'Sau những buổi đầu, giáo viên hỏi bạn thấy nhanh hay chậm để điều chỉnh.' },
+];
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+};
+---
+<Base title="Evad English" schema={[faqSchema]}>
+  <!-- Hero tối -->
+  <section class="hero-bg">
+    <div class="wrap pb-10 pt-24 sm:pb-16 sm:pt-32">
+      <div class="hero-window relative overflow-hidden rounded-[2rem] bg-surface/70 shadow-lift ring-1 ring-sky/50 backdrop-blur">
+        <div class="flex items-center gap-2 border-b border-sky/30 bg-baby/80 px-5 py-3">
+          <span class="size-3 rounded-full bg-[#ff6b6b]" aria-hidden="true"></span>
+          <span class="size-3 rounded-full bg-gold" aria-hidden="true"></span>
+          <span class="size-3 rounded-full bg-[#4ade80]" aria-hidden="true"></span>
+          <span class="ml-3 flex items-center gap-2 text-xs font-bold text-heading/80">
+            <span class="relative flex size-2" aria-hidden="true">
+              <span class="absolute inline-flex size-full animate-ping rounded-full bg-[#ff5a5f] opacity-75"></span>
+              <span class="relative inline-flex size-2 rounded-full bg-[#ff5a5f]"></span>
+            </span>
+            Buổi học 1-1 · Online
+          </span>
+          <span class="ml-auto text-xs font-bold tabular-nums text-heading/60" data-call-timer aria-hidden="true">24:10</span>
+        </div>
+
+        <div class="p-6 sm:p-12">
+          <h1 class="h-display max-w-4xl" aria-label={headline}>
+            {headline.split(' ').map((w, i) => <><span class="word" style={`--i:${i}`} aria-hidden="true">{w}</span>{' '}</>)}
+          </h1>
+
+          <div class="mt-10 grid gap-10 md:grid-cols-2 md:items-end md:gap-12">
+            <div class="relative flex flex-col gap-3" aria-label="Ví dụ minh họa một đoạn hội thoại trong buổi học">
+              {chat.map((m) => (
+                <div class:list={['msg flex max-w-[90%] items-end gap-2', m.out ? 'flex-row-reverse self-end' : 'self-start']} style={`--d:${m.d}s`}>
+                  <span class:list={['grid size-7 shrink-0 place-items-center rounded-full text-[0.65rem] font-extrabold', m.out ? 'bg-gold text-deep' : 'bg-azure text-white']} aria-hidden="true">{m.out ? 'B' : 'D'}</span>
+                  <p class:list={['bubble !max-w-none', m.out ? 'bubble-out' : 'bubble-in']}>{m.text}</p>
+                </div>
+              ))}
+              <p class="msg self-end pr-9 text-[0.7rem] font-semibold text-ink/55" style="--d:5s">Đã xem ✓✓</p>
+              <p class="text-xs text-ink/55">Hội thoại minh họa</p>
+              <span class="sticker absolute -right-2 -top-6 hidden rotate-6 rounded-2xl bg-gold px-4 py-2 text-sm font-extrabold text-deep shadow-lg sm:block">Giáo viên TESOL ✦</span>
+            </div>
+
+            <div>
+              <p class="lead">
+                Evad English dạy tiếng Anh giao tiếp online, một giáo viên kèm một học viên. Học để dùng thật: viết email, nói chuyện hằng ngày, làm việc với người nước ngoài.
+              </p>
+              <div class="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                <a href={ctaHref} target={ctaExternal ? '_blank' : undefined} rel={ctaExternal ? 'noopener' : undefined} class="btn btn-cta" data-magnetic>Nhắn Zalo đăng ký</a>
+                <a href="/tim-khoa-hoc" class="btn btn-ghost">Tìm khóa theo ngân sách</a>
+              </div>
+            </div>
+          </div>
+
+          <a href="#thong-so" aria-label="Xuống xem tiếp" class="bounce mx-auto mt-10 block w-fit text-heading/60 hover:text-heading">
+            <svg class="size-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6" /></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dải chữ chạy -->
+  <section class="bg-mist">
+    <Marquee words={['Nói tự tin', 'Nghe hiểu', 'Viết email', 'Giao tiếp 1-1']} />
+  </section>
+
+  <!-- Thông số -->
+  <section id="thong-so" class="bg-mist pb-24 pt-8 sm:pb-32" aria-label="Evad English qua những con số">
+    <ul class="wrap grid gap-4 md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-[auto_auto]">
+      {years && (
+        <li class="relative isolate flex min-h-[18rem] flex-col justify-end overflow-hidden rounded-[2rem] p-7 ring-1 ring-sky/30 sm:p-9 md:row-span-2">
+          <Image src={duyUs} alt="" width={720} aria-hidden="true" class="absolute inset-0 -z-10 size-full object-cover object-[55%_20%] opacity-80 grayscale" />
+          <span class="absolute inset-0 -z-10 bg-azure mix-blend-color" aria-hidden="true"></span>
+          <span class="absolute inset-0 -z-10 bg-gradient-to-t from-deep via-deep/60 to-deep/10" aria-hidden="true"></span>
+          <p class="text-7xl font-extrabold tracking-tight text-white sm:text-8xl" data-count={years.value} data-suffix={years.suffix}>{years.value}{years.suffix}</p>
+          <p class="mt-2 max-w-xs text-lg font-semibold text-white/85">{years.label}</p>
+        </li>
+      )}
+      {score && (
+        <li class="rounded-[2rem] bg-surface/70 p-7 ring-1 ring-sky/30 sm:p-9">
+          <p class="text-6xl font-extrabold tracking-tight text-heading" data-count={score.value} data-suffix={score.suffix}>{score.value}{score.suffix}</p>
+          <div class="mt-6 flex gap-1.5" aria-hidden="true">
+            {Array.from({ length: 10 }, (_, i) => (
+              <span class:list={['meter-seg h-8 flex-1 rounded-md', i < score.value ? 'bg-gold' : 'bg-white/10']} style={`--i:${i}`}></span>
+            ))}
+          </div>
+          <p class="mt-4 font-semibold text-ink/80">{score.label}</p>
+        </li>
+      )}
+      {learners && (
+        <li class="rounded-[2rem] bg-surface/70 p-7 ring-1 ring-sky/30 sm:p-9">
+          <p class="text-6xl font-extrabold tracking-tight text-heading" data-count={learners.value} data-suffix={learners.suffix}>{learners.value}{learners.suffix}</p>
+          <div class="mt-6 grid grid-cols-[repeat(20,minmax(0,1fr))] gap-1.5" aria-hidden="true">
+            {Array.from({ length: Math.min(learners.value, 60) }, (_, i) => (
+              <span class="aspect-square rounded-full bg-glow/70" style={`opacity:${0.45 + (i % 7) * 0.08}`}></span>
+            ))}
+          </div>
+          <p class="mt-4 font-semibold text-ink/80">{learners.label}</p>
+        </li>
+      )}
+      <li class="rounded-[2rem] bg-surface/70 p-7 ring-1 ring-sky/30 sm:p-9 md:col-span-2 lg:col-span-2">
+        <div class="flex flex-wrap items-end gap-x-5 gap-y-2">
+          <p class="text-6xl font-extrabold tracking-tight text-heading" data-count={courses.length}>{courses.length}</p>
+          <p class="pb-2 font-semibold text-ink/80">khóa học cho từng mục tiêu</p>
+        </div>
+        <ul class="mt-6 flex flex-wrap gap-2">
+          {courses.map((c) => (
+            <li><a href={`/khoa-hoc/${c.id}`} class="block rounded-full bg-baby px-4 py-2 text-sm font-bold text-heading ring-1 ring-sky/30 transition hover:bg-azure hover:text-white">{c.data.title}</a></li>
+          ))}
+        </ul>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Nội dung sáng -->
+  <div class="sheet theme-light">
+    <section id="gioi-thieu" class="wrap section">
+      <div class="grid gap-6 lg:grid-cols-[0.7fr_1.3fr] lg:gap-14">
+        <h2 class="h-section">Về Evad English</h2>
+        <p class="text-xl font-semibold leading-relaxed text-heading sm:text-2xl sm:leading-relaxed">{about.intro}</p>
+      </div>
+
+      <!-- Điểm khác biệt: khối tối nổi giữa tờ sáng -->
+      <div class="theme-dark relative mt-14 overflow-hidden rounded-[2.5rem] px-6 py-10 sm:px-10 sm:py-12">
+        <div class="pointer-events-none absolute -right-24 -top-24 size-80 rounded-full bg-azure/40 blur-3xl" aria-hidden="true"></div>
+        <h3 class="relative text-2xl sm:text-3xl">Điểm khác biệt</h3>
+        <ul class="relative mt-8 grid gap-8 md:grid-cols-3 md:gap-0 md:divide-x md:divide-white/15">
+          {about.differences.map((d, i) => (
+            <li class:list={['md:px-8', i === 0 && 'md:pl-0', i === about.differences.length - 1 && 'md:pr-0']}>
+              <span class="grid size-12 place-items-center rounded-2xl bg-gold text-deep" aria-hidden="true">
+                <svg class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d={diffIcons[i % diffIcons.length]} /></svg>
+              </span>
+              <p class="mt-5 text-xl font-extrabold text-heading">{d.title}</p>
+              <p class="mt-2 leading-relaxed text-ink/80">{d.text}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <h3 class="mt-20 text-2xl sm:text-3xl">Một buổi học 1-1 làm được gì cho bạn</h3>
+      <div class="mt-10 grid gap-4 lg:grid-cols-4 lg:grid-rows-2">
+        <div class="card relative min-h-[22rem] overflow-hidden lg:col-span-2 lg:row-span-2">
+          <div data-tilt class="absolute inset-0">
+            <Image src={duyTeaching} alt="Thầy Duy đang dạy" width={760} class="size-full object-cover" />
+          </div>
+          <div class="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-deep/90 to-transparent p-7 pt-24">
+            <p class="text-2xl font-extrabold text-white">Giáo viên được đào tạo bài bản để dạy ngôn ngữ</p>
+            <p class="mt-2 text-sm text-white/80">Chứng chỉ TESOL 120 giờ, được ALAP công nhận.</p>
+          </div>
+        </div>
+        <div class="card p-7">
+          <h3 class="text-xl">Một giáo viên, một học viên</h3>
+          <p class="mt-3 leading-relaxed text-ink/80">Cả buổi tập trung vào bạn, nên bạn được nói nhiều hơn.</p>
+        </div>
+        <div class="card p-7">
+          <h3 class="text-xl">Tốc độ do bạn quyết định</h3>
+          <p class="mt-3 leading-relaxed text-ink/80">Thấy nhanh hay chậm, nói với giáo viên và buổi sau sẽ được điều chỉnh.</p>
+        </div>
+        <div class="card p-7">
+          <h3 class="text-xl">Dùng được vào việc thật</h3>
+          <p class="mt-3 leading-relaxed text-ink/80">Học viên đem bài học vào viết email, báo cáo và làm nội dung bằng tiếng Anh.</p>
+        </div>
+        <div class="card p-7">
+          <h3 class="text-xl">Học online, ở đâu cũng được</h3>
+          <p class="mt-3 leading-relaxed text-ink/80">Chỉ cần điện thoại hoặc máy tính và đường truyền ổn định.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Đánh giá: gọn trong một khối tối -->
+    <section id="danh-gia" class="wrap pb-16 sm:pb-24" aria-labelledby="fb-title">
+      <div class="theme-dark overflow-hidden rounded-[2.5rem] pt-10 sm:pt-12">
+        <div class="flex flex-wrap items-end justify-between gap-3 px-6 sm:px-10">
+          <h2 id="fb-title" class="text-2xl sm:text-3xl">Học viên nói gì sau những buổi học</h2>
+          <a href="/danh-gia" class="font-bold text-gold underline underline-offset-4">Xem tất cả đánh giá</a>
+        </div>
+        <div class="mt-8 px-6 sm:px-10"><ReviewSpotlight compact /></div>
+        <div class="mt-6 pb-4"><Ticker compact /></div>
+      </div>
+    </section>
+
+    <!-- Người sáng lập -->
+    <section id="founder" class="wrap pb-16 sm:pb-24">
+      <div class="grid items-start gap-8 md:grid-cols-[0.9fr_1.1fr] md:gap-14">
+        <div class="overflow-hidden rounded-[2rem] shadow-lift md:sticky md:top-28">
+          <div data-tilt>
+            <Image src={duyWork} alt="Duy làm việc trên laptop bên bờ biển" width={640} class="aspect-[4/5] w-full object-cover object-[80%_center]" loading="lazy" />
+          </div>
+        </div>
+        <div>
+          <h2 class="h-section">Người sáng lập</h2>
+          <h3 class="mt-4 text-xl !text-glow">{founderData.name}</h3>
+          <p class="text-sm font-semibold text-ink/70">{founderData.role}</p>
+          <p class="mt-4 max-w-prose text-lg leading-relaxed text-ink/85">{founderData.intro}</p>
+          <ul class="mt-6 grid gap-3 sm:grid-cols-3">
+            {founderData.highlights.map((h) => (
+              <li class="card p-5">
+                <p class="font-extrabold text-heading">{h.title}</p>
+                <p class="mt-1 text-sm leading-relaxed text-ink/75">{h.text}</p>
+              </li>
+            ))}
+          </ul>
+          <div class="mt-6 max-w-prose space-y-4 leading-relaxed text-ink/80">
+            {founderData.story.map((p) => <p>{p}</p>)}
+          </div>
+        </div>
+      </div>
+
+      <ul class="mt-12 grid gap-5 sm:grid-cols-2">
+        <li>
+          <figure>
+            <div class="aspect-[4/3] overflow-hidden rounded-3xl shadow-card">
+              <Image src={duyUs} alt="Duy cùng bạn bè tại một trận bóng rổ ở Mỹ" width={720} class="size-full object-cover object-[55%_center] transition-transform duration-700 hover:scale-105" loading="lazy" />
+            </div>
+            <figcaption class="mt-3 text-sm font-semibold text-ink/75">Những năm sống ở Mỹ</figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure>
+            <div class="aspect-[4/3] overflow-hidden rounded-3xl bg-white p-3 shadow-card ring-1 ring-sky/40">
+              <Image src={cert} alt="Chứng chỉ TESOL 120 giờ của Nguyễn Ngọc Hoàng Duy" width={720} class="size-full object-contain" loading="lazy" />
+            </div>
+            <figcaption class="mt-3 text-sm font-semibold text-ink/75">Chứng chỉ TESOL 120 giờ</figcaption>
+          </figure>
+        </li>
+      </ul>
+    </section>
+
+    <section class="wrap pb-16 sm:pb-24">
+      <div class="flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <h2 class="h-section">Chọn khóa hợp mục tiêu của bạn</h2>
+          <p class="mt-3 max-w-prose text-ink/80">Bấm Xem chi tiết để biết bạn sẽ học gì, học phí và lộ trình.</p>
+        </div>
+        <a href="/khoa-hoc" class="font-bold text-glow underline underline-offset-4">Xem tất cả</a>
+      </div>
+      <ul class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-6">
+        {courses.map((c) => <CourseRow course={c} />)}
+      </ul>
+    </section>
+
+    <!-- Cách bắt đầu: một chuỗi các bước nên đánh số -->
+    <section id="cach-bat-dau" class="wrap pb-16 sm:pb-24">
+      <h2 class="h-section max-w-2xl">Bắt đầu học như thế nào</h2>
+      <p class="mt-3 max-w-prose text-ink/80">Bốn bước, bạn chỉ cần một tin nhắn Zalo để bắt đầu.</p>
+      <ol class="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        {steps.map((s, i) => (
+          <li class="card p-6">
+            <span class="grid size-10 place-items-center rounded-full bg-azure text-base font-extrabold text-white">{i + 1}</span>
+            <h3 class="mt-5 text-xl">{s.title}</h3>
+            <p class="mt-2 leading-relaxed text-ink/80">{s.text}</p>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section id="cau-hoi" class="wrap pb-16 sm:pb-24">
+      <h2 class="h-section max-w-2xl">Câu hỏi thường gặp</h2>
+      <p class="mt-3 max-w-prose text-ink/80">Chưa thấy câu trả lời bạn cần? Nhắn Zalo, bên mình trả lời trực tiếp.</p>
+      <div class="mt-8 max-w-3xl"><Faq /></div>
+    </section>
+  </div>
+
+  <!-- Đánh giá (tối) -->
+
+  <div class="bg-deep pt-16"><CtaBand /></div>
+</Base>

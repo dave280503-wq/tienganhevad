@@ -1,0 +1,49 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import ReviewFan from '../components/ReviewFan.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { loadReviews } from '../reviews';
+
+const reviews = await loadReviews();
+---
+<Base title="Đánh giá từ học viên" description="Tin nhắn thật từ học viên Evad English sau những buổi học 1-1.">
+  <PageHero title="Đánh giá từ học viên" lead="Ảnh chụp tin nhắn thật học viên gửi cho Evad English, chưa chỉnh sửa nội dung. Bấm vào ảnh để xem rõ.">
+    <p class="mt-8 flex items-center gap-3 text-sm font-bold text-heading">
+      <span class="flex -space-x-2" aria-hidden="true">
+        {reviews.slice(0, 4).map((r) => <span class="grid size-9 place-items-center rounded-full bg-azure text-xs font-extrabold text-white ring-2 ring-mist">{r.initial}</span>)}
+      </span>
+      {reviews.length} tin nhắn từ học viên và giáo viên
+    </p>
+    <ReviewFan reviews={reviews} slot="aside" />
+  </PageHero>
+
+  <div class="sheet theme-light">
+    <div class="wrap section">
+      <ul class="gap-6 sm:columns-2 lg:columns-3">
+        {reviews.map((r, i) => (
+          <li class="mb-6 break-inside-avoid">
+            <figure class="overflow-hidden rounded-[2rem] bg-white shadow-card ring-1 ring-sky/40">
+              <button type="button" data-zoom={r.full} data-alt={`Tin nhắn của ${r.author}`} aria-label={`Phóng to tin nhắn của ${r.author}`}
+                class="group relative block w-full cursor-zoom-in overflow-hidden bg-[#eef2f8] p-3">
+                <Image src={r.screenshot} alt="" width={640} class="h-auto w-full rounded-[1.3rem] transition-transform duration-500 group-hover:scale-[1.03]" loading={i < 3 ? 'eager' : 'lazy'} />
+                <span class="absolute right-5 top-5 grid size-9 place-items-center rounded-full bg-white/90 text-[#06214f] opacity-0 shadow transition group-hover:opacity-100 group-focus-visible:opacity-100" aria-hidden="true">
+                  <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="11" cy="11" r="6.5" /><path d="M16 16l4.5 4.5M11 8.5v5M8.5 11h5" /></svg>
+                </span>
+              </button>
+              <figcaption class="p-6">
+                <p class="text-lg font-semibold leading-snug text-heading">“{r.quote}”</p>
+                <p class="mt-4 flex items-center gap-3">
+                  <span class="grid size-9 place-items-center rounded-full bg-azure text-sm font-extrabold text-white" aria-hidden="true">{r.initial}</span>
+                  <span class="text-sm font-bold text-glow">{r.author}</span>
+                </p>
+              </figcaption>
+            </figure>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <CtaBand />
+  </div>
+</Base>

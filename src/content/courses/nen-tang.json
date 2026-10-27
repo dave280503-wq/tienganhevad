@@ -1,0 +1,37 @@
+{
+  "order": 1,
+  "title": "Nền tảng tiếng Anh",
+  "summary": "Bắt đầu từ con số 0. 8 buổi, 8 chủ điểm để lấy gốc và tự tin bắt đầu nói tiếng Anh.",
+  "audience": "Bắt đầu từ số 0",
+  "cover": "../../assets/team/team-group.jpg",
+  "coverPosition": "center 35%",
+  "highlights": ["Kèm 1-1 với giáo viên", "8 buổi, 8 chủ điểm", "60 phút mỗi buổi", "Lịch học theo giờ rảnh của bạn"],
+  "priceType": "session",
+  "price": 168000,
+  "sessionMinutes": 60,
+  "sessionsPerWeek": 2,
+  "billing": "tháng",
+  "entryLevel": "Con số 0, chưa có nền tảng tiếng Anh",
+  "entry": [
+    "Chưa có nền tảng tiếng Anh",
+    "Muốn trang bị thêm một ngôn ngữ để nâng cấp đời sống và sự nghiệp"
+  ],
+  "outcome": [
+    "Có nền cơ bản để bắt đầu học nói và viết tiếng Anh",
+    "Nghe và hiểu được tiếng Anh cơ bản",
+    "Nắm vững gốc và cấu trúc để sẵn sàng “phóng” tiếng Anh"
+  ],
+  "roadmap": [
+    {
+      "title": "8 buổi, 8 chủ điểm để lấy gốc",
+      "items": [
+        "Học chuyên sâu các loại từ, giới từ, câu hỏi (Question), động từ to be, đại từ và cách đặt câu",
+        "Được hỗ trợ tài liệu từ vựng rất cơ bản để lấy gốc và tự tin nói tiếng Anh"
+      ]
+    }
+  ],
+  "feeNotes": [
+    "Học cùng đội ngũ giáo viên được đào tạo bài bản",
+    "Kèm 1-1, lịch học linh động, sắp xếp theo lịch rảnh của học viên"
+  ]
+}

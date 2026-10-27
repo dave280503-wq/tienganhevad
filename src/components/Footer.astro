@@ -1,0 +1,44 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import logo from '../assets/evad-logo-dark.png';
+import { ctaHref, ctaExternal, nav } from '../lib';
+
+const courses = (await getCollection('courses')).sort((a, b) => a.data.order - b.data.order);
+const link = 'text-white/80 transition-colors hover:text-glow';
+---
+<footer class="bg-deep text-white">
+  <div class="wrap grid gap-10 py-16 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1.2fr_1fr]">
+    <div class="max-w-xs">
+      <Image src={logo} alt="Evad English" width={150} height={34} class="h-auto w-[150px]" />
+      <p class="mt-4 text-sm leading-relaxed text-white/75">Tiếng Anh giao tiếp 1-1 online cho người Việt.</p>
+      <a href={ctaHref} target={ctaExternal ? '_blank' : undefined} rel={ctaExternal ? 'noopener' : undefined} class="btn btn-cta mt-6 !min-h-11">Nhắn Zalo đăng ký</a>
+    </div>
+
+    <nav aria-label="Khám phá">
+      <h2 class="text-sm !font-bold !tracking-normal !text-white">Khám phá</h2>
+      <ul class="mt-4 grid gap-3 text-sm">
+        {nav.map((n) => <li><a href={n.href} class={link}>{n.label}</a></li>)}
+      </ul>
+    </nav>
+
+    <nav aria-label="Khóa học">
+      <h2 class="text-sm !font-bold !tracking-normal !text-white">Khóa học</h2>
+      <ul class="mt-4 grid gap-3 text-sm">
+        {courses.map((c) => <li><a href={`/khoa-hoc/${c.id}`} class={link}>{c.data.title}</a></li>)}
+      </ul>
+    </nav>
+
+    <div>
+      <h2 class="text-sm !font-bold !tracking-normal !text-white">Liên hệ</h2>
+      <ul class="mt-4 grid gap-3 text-sm">
+        <li><a href="/lien-he" class={link}>Đăng ký qua Zalo</a></li>
+        <li><a href="/tim-khoa-hoc" class={link}>Tìm khóa theo ngân sách</a></li>
+        <li><a href="/danh-gia" class={link}>Đánh giá từ học viên</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-white/10">
+    <p class="wrap py-6 text-xs text-white/60">© Evad English. Chứng chỉ TESOL do ETP TESOL cấp, được ALAP công nhận.</p>
+  </div>
+</footer>

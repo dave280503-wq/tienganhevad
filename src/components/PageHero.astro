@@ -1,0 +1,30 @@
+---
+// Phần đầu trang dùng chung: ảnh chìm bên phải (nhuộm xanh, tan vào nền), tiêu đề lớn, vạch vàng.
+// slot "top": phía trên tiêu đề · slot mặc định: dưới đoạn mô tả · slot "aside": cột bên phải (thay cho ảnh).
+import { Image } from 'astro:assets';
+
+interface Props { title: string; lead?: string; cover?: ImageMetadata; coverPosition?: string; }
+const { title, lead, cover, coverPosition = 'center 30%' } = Astro.props;
+const hasAside = Astro.slots.has('aside');
+---
+<header class="page-hero">
+  {cover && (
+    <div class="absolute inset-0 -z-10 lg:left-[40%]" aria-hidden="true">
+      <Image src={cover} alt="" widths={[640, 1100, 1600]} sizes="(min-width: 1024px) 60vw, 100vw" loading="eager"
+        class="cover-in size-full object-cover grayscale contrast-125" style={`object-position: ${coverPosition}`} />
+      <div class="absolute inset-0 bg-azure mix-blend-color"></div>
+      <div class="absolute inset-0 bg-mist/75 lg:bg-[linear-gradient(90deg,var(--color-mist)_0%,rgb(9_26_61/0.55)_45%,rgb(9_26_61/0.1)_100%)]"></div>
+      <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-mist to-transparent"></div>
+    </div>
+  )}
+  <div class:list={['wrap pb-28 pt-28 sm:pb-36 sm:pt-40', hasAside && 'grid gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:items-center']}>
+    <div class="max-w-2xl">
+      <slot name="top" />
+      <h1 class="text-[2.6rem] font-extrabold leading-[1.04] tracking-tight text-heading sm:text-6xl lg:text-7xl">{title}</h1>
+      <span class="mt-7 block h-1.5 w-16 rounded-full bg-gold" aria-hidden="true"></span>
+      {lead && <p class="mt-6 max-w-xl text-lg leading-relaxed text-ink/85 sm:text-xl">{lead}</p>}
+      <slot />
+    </div>
+    {hasAside && <div><slot name="aside" /></div>}
+  </div>
+</header>
