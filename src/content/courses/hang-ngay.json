@@ -7,6 +7,7 @@
   "coverPosition": "70% 40%",
   "highlights": ["Kèm 1-1 với giáo viên", "Lộ trình 3 tháng", "60 phút mỗi buổi, 2 buổi mỗi tuần", "Đóng học phí theo tháng"],
   "priceType": "session",
+  "originalPrice": 289000,
   "price": 168000,
   "sessionMinutes": 60,
   "sessionsPerWeek": 2,

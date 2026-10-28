@@ -17,6 +17,8 @@ const courses = defineCollection({
     // session: giá/buổi · week: giá/tuần · contact: liên hệ để biết giá
     priceType: z.enum(['session', 'week', 'contact']),
     price: z.number().optional(),
+    // Giá gốc (cùng đơn vị với price): có thì hiện gạch đi và nhãn % giảm
+    originalPrice: z.number().optional(),
     sessionsPerWeek: z.number().optional(),
     // chỉ dùng khi priceType = contact, để tab 5 xếp vào đúng mức ngân sách
     budgetMin: z.number().optional(),

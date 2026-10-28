@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import { Image, getImage } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
+import PriceDrop from '../../components/PriceDrop.astro';
 import { priceLabel, ctaHref, ctaExternal } from '../../lib';
 import appOverview from '../../assets/software/tong-quan.png';
 import appSchedule from '../../assets/software/lich-hoc.png';
@@ -183,7 +184,7 @@ const check = 'M5 12l5 5L20 7';
       <section id="hoc-phi" aria-labelledby="hoc-phi-h" class="grid gap-10 rounded-[2.5rem] bg-white p-7 ring-1 ring-sky/40 sm:p-12 lg:grid-cols-[1fr_auto] lg:items-end">
         <div>
           <h2 id="hoc-phi-h" class="text-base font-bold text-ink/70">Học phí</h2>
-          <p class="mt-2 text-4xl font-extrabold tracking-tight text-heading sm:text-5xl">{price.main}</p>
+          <div class="mt-2"><PriceDrop course={c} /></div>
           {price.note && <p class="mt-2 text-ink/75">{price.note}</p>}
           {c.feeNotes.length > 0 && (
             <ul class="mt-7 grid gap-3">

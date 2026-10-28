@@ -1,0 +1,19 @@
+---
+// Giá khóa học. Có giá gốc thì giá gốc bị gạch đỏ khi cuộn tới, rồi giá mới và nhãn % giảm hiện lên
+// (CSS .price-drop trong global.css, fx.ts gắn lớp .struck).
+import type { CollectionEntry } from 'astro:content';
+import { priceLabel } from '../lib';
+
+interface Props { course: CollectionEntry<'courses'>['data']; size?: 'lg' | 'md'; align?: 'start' | 'end'; }
+const { course, size = 'lg', align = 'start' } = Astro.props;
+const p = priceLabel(course);
+---
+<div class:list={[p.was && 'price-drop']} data-strike={p.was ? '' : undefined}>
+  {p.was && (
+    <p class:list={['flex flex-wrap items-center gap-2', align === 'end' && 'sm:justify-end']}>
+      <del class:list={['strike relative font-bold text-ink/50', size === 'lg' ? 'text-xl' : 'text-base']}>{p.was}</del>
+      <span class="price-badge rounded-full bg-[#e5484d] px-2.5 py-0.5 text-xs font-extrabold text-white">Giảm {p.off}%</span>
+    </p>
+  )}
+  <p class:list={['price-new font-extrabold tracking-tight', p.was && 'mt-1', size === 'lg' ? 'text-4xl text-heading sm:text-5xl' : 'text-2xl text-glow']}>{p.main}</p>
+</div>

@@ -8,16 +8,24 @@ export const ctaExternal = Boolean(site.zaloUrl);
 
 export const vnd = (n: number) => n.toLocaleString('vi-VN') + 'đ';
 
-export function priceLabel(c: Course): { main: string; note?: string } {
+type PriceLabel = { main: string; note?: string; was?: string; off?: number };
+
+/** Giá gốc gạch đi và % giảm, chỉ khi giá gốc cao hơn giá hiện tại. */
+function discount(c: Course, unit: string): Pick<PriceLabel, 'was' | 'off'> {
+  if (!c.originalPrice || !c.price || c.originalPrice <= c.price) return {};
+  return { was: `${vnd(c.originalPrice)}${unit}`, off: Math.round((1 - c.price / c.originalPrice) * 100) };
+}
+
+export function priceLabel(c: Course): PriceLabel {
   if (c.priceType === 'session' && c.price) {
     const parts = [
       c.sessionMinutes && `${c.sessionMinutes} phút/buổi`,
       c.sessionsPerWeek && `${c.sessionsPerWeek} buổi/tuần`,
       c.billing && `đóng học phí theo ${c.billing}`,
     ].filter(Boolean);
-    return { main: `${vnd(c.price)}/buổi`, note: parts.length ? parts.join(' · ') : undefined };
+    return { main: `${vnd(c.price)}/buổi`, note: parts.length ? parts.join(' · ') : undefined, ...discount(c, '/buổi') };
   }
-  if (c.priceType === 'week' && c.price) return { main: `${vnd(c.price)}/tuần` };
+  if (c.priceType === 'week' && c.price) return { main: `${vnd(c.price)}/tuần`, ...discount(c, '/tuần') };
   return {
     main: 'Liên hệ để biết giá',
     note: c.budgetMin && c.budgetMax ? `Tham khảo ${c.budgetMin / 1000}–${c.budgetMax / 1000}k/buổi` : undefined,
