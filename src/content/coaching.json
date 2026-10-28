@@ -1,0 +1,41 @@
+{
+  "title": "Coaching giáo viên 1-1",
+  "lead": "Dành cho giáo viên và gia sư muốn kinh doanh từ chính dịch vụ dạy học của mình.",
+  "promises": [
+    "To-do list mỗi ngày",
+    "Cam kết kiếm được học viên",
+    "Hoàn tiền 100% nếu không"
+  ],
+  "checklistNote": "Ví dụ checklist một ngày",
+  "checklist": [
+    "Đăng 1 bài content về lớp học",
+    "Nhắn tin cho người quan tâm",
+    "Cập nhật giáo trình buổi tới",
+    "Ghi học viên mới vào phần mềm"
+  ],
+  "pains": [
+    "Bạn muốn kinh doanh từ dịch vụ giảng dạy, gia sư của mình",
+    "Chưa hiểu thị trường, không biết cách khai thác",
+    "Thiếu các công cụ hỗ trợ",
+    "Chưa có chuyên môn sales, marketing"
+  ],
+  "gains": [
+    { "title": "Blueprint 3–6 tháng", "text": "Biết rõ mình sẽ làm gì trong 3–6 tháng tới để đi xa với dịch vụ dạy học." },
+    { "title": "Live coaching hàng tuần", "text": "Gặp trực tiếp mỗi tuần, liên tục trong 1 tháng." },
+    { "title": "Cầm tay chỉ việc", "text": "Có checklist cho từng ngày, biết hôm nay cần làm gì." },
+    { "title": "Công cụ hỗ trợ", "text": "Công cụ để tạo phần mềm quản lý học viên, lên giáo trình và tạo content." },
+    { "title": "Phần mềm quản lý", "text": "Được cung cấp phần mềm quản lý lớp học, lịch học và học viên." },
+    { "title": "Hoàn tiền 100%", "text": "Nếu bạn không kiếm được học viên." },
+    { "title": "Xuất hiện đúng nơi học viên có mặt", "text": "Biết học viên của bạn đang ở đâu để xuất hiện đúng chỗ." },
+    { "title": "Kịch bản chốt học viên, phụ huynh", "text": "Có sẵn kịch bản để chốt học viên và phụ huynh." },
+    { "title": "Bước 1-2-3 để scale lâu dài", "text": "Đi từng bước để mở rộng dịch vụ dạy học lâu dài." }
+  ],
+  "originalPrice": 12000000,
+  "price": 4168000,
+  "priceUnit": "cho 3 tháng",
+  "guarantee": "Cam kết hoàn tiền 100% nếu không kiếm được học viên",
+  "trial": {
+    "title": "Tham gia buổi Trial Coaching",
+    "text": "để được xem xét giảm học phí."
+  }
+}

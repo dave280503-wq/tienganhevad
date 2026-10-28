@@ -1,0 +1,232 @@
+---
+import { Image, getImage } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import coaching from '../content/coaching.json';
+import { ctaHref, ctaExternal, vnd } from '../lib';
+import appOverview from '../assets/software/tong-quan.png';
+import appSchedule from '../assets/software/lich-hoc.png';
+import appNotes from '../assets/software/luu-y-thong-ke.png';
+
+const cta = { href: ctaHref, target: ctaExternal ? '_blank' : undefined, rel: ctaExternal ? 'noopener' : undefined };
+const check = 'M5 12l5 5L20 7';
+
+const appShots = [
+  { src: appOverview, alt: 'Trang tổng quan: buổi học sắp tới, tiến độ và feedback mới' },
+  { src: appSchedule, alt: 'Lịch học theo tuần của lớp' },
+  { src: appNotes, alt: 'Lưu ý của giáo viên, tài liệu và thống kê buổi học' },
+];
+const zoomed = await Promise.all(appShots.map((s) => getImage({ src: s.src, width: 1600 })));
+
+// Biểu tượng cho các ô "Coaching sẽ giúp bạn", theo thứ tự trong coaching.json
+const icons = [
+  'M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3zM9 3v15M15 6v15',
+  'M3 7h12v10H3zM15 10l6-3v10l-6-3',
+  'M9 6h11M9 12h11M9 18h11M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2',
+  'M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z',
+];
+// Thứ tự trong coaching.json: blueprint, live, daily, tools, software, refund, presence, script, scale
+const [blueprint, live, daily, tools, , refund, presence, script, scale] = coaching.gains;
+const moreIcons = {
+  presence: 'M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21zM12 12a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z',
+  script: 'M4 5h16v11H9l-5 4zM8 9h8M8 12h5',
+};
+const software = coaching.gains[4];
+---
+<Base title={coaching.title} description={`${coaching.lead} ${coaching.guarantee}.`}>
+  <PageHero title={coaching.title} lead={coaching.lead}>
+    <ul class="mt-8 flex flex-wrap gap-2">
+      {coaching.promises.map((p, i) => (
+        <li class:list={['flex items-center gap-2 rounded-full px-4 py-2 text-sm font-bold', i === coaching.promises.length - 1 ? 'bg-gold text-deep' : 'bg-white/10 text-heading ring-1 ring-white/20']}>
+          <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={check} /></svg>
+          {p}
+        </li>
+      ))}
+    </ul>
+    <div class="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+      <a {...cta} class="btn btn-cta" data-magnetic>Nhắn Zalo đăng ký coaching</a>
+      <a href="#hoc-phi" class="btn btn-ghost">Xem học phí</a>
+    </div>
+
+    <!-- Checklist mỗi ngày: bấm để tick, đếm số việc đã xong bằng CSS counter -->
+    <div slot="aside" class="mx-auto w-full max-w-md lg:rotate-2">
+      <fieldset class="todo rounded-[2rem] bg-white p-6 text-[#1a2f5e] shadow-[0_40px_80px_-30px_rgb(0_0_0/0.85)] sm:p-8">
+        <legend class="sr-only">{coaching.checklistNote}</legend>
+        <p class="text-lg font-extrabold text-[#06214f]">Việc hôm nay</p>
+        <ul class="mt-5 grid gap-2">
+          {coaching.checklist.map((item, i) => (
+            <li>
+              <label class="flex cursor-pointer items-center gap-3 rounded-2xl p-3 transition hover:bg-[#f3f8ff]">
+                <input type="checkbox" class="peer sr-only" checked={i === 0} />
+                <span class="grid size-6 shrink-0 place-items-center rounded-lg ring-2 ring-[#9ac5ff] transition peer-checked:bg-[#fbcf6e] peer-checked:ring-[#f5b93a] peer-focus-visible:outline peer-focus-visible:outline-3 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-[#1f5fd6] [&>svg]:scale-0 peer-checked:[&>svg]:scale-100">
+                  <svg class="size-4 text-[#061330] transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={check} /></svg>
+                </span>
+                <span class="font-semibold transition peer-checked:text-[#1a2f5e]/45 peer-checked:line-through">{item}</span>
+              </label>
+            </li>
+          ))}
+        </ul>
+        <!-- Đặt sau danh sách để CSS counter đếm được các ô đã tick -->
+        <div class="mt-4 flex items-center justify-between gap-4 border-t border-[#9ac5ff]/50 pt-4">
+          <p class="text-xs text-[#1a2f5e]/55">{coaching.checklistNote}, bấm để thử tick</p>
+          <p class="shrink-0 rounded-full bg-[#e4eefe] px-3 py-1 text-xs font-bold text-[#1f5fd6]" aria-hidden="true">Xong <span class="todo-count"></span>/{coaching.checklist.length}</p>
+        </div>
+      </fieldset>
+    </div>
+  </PageHero>
+
+  <div class="sheet theme-light">
+    <div class="wrap section space-y-24 sm:space-y-32">
+
+      <!-- Coaching dành cho ai -->
+      <section aria-labelledby="danh-cho-ai" class="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+        <div>
+          <h2 id="danh-cho-ai" class="h-section">Coaching này dành cho bạn nếu</h2>
+          <p class="mt-4 max-w-sm text-ink/75">Bạn dạy tốt, nhưng biến việc dạy thành một công việc kinh doanh lại là chuyện khác.</p>
+        </div>
+        <ul class="grid gap-3 sm:grid-cols-2">
+          {coaching.pains.map((p) => (
+            <li class="flex items-start gap-4 rounded-[1.5rem] bg-white p-5 ring-1 ring-sky/40">
+              <span class="mt-1.5 size-3 shrink-0 rounded-full ring-[3px] ring-glow/60" aria-hidden="true"></span>
+              <span class="text-lg font-semibold leading-snug text-heading">{p}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <!-- Coaching sẽ giúp bạn -->
+      <section aria-labelledby="giup-ban">
+        <h2 id="giup-ban" class="h-section">Coaching sẽ giúp bạn</h2>
+        <div class="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <article class="rounded-[2rem] bg-white p-7 ring-1 ring-sky/40 sm:p-9 lg:col-span-2">
+            <span class="grid size-12 place-items-center rounded-2xl bg-azure text-white" aria-hidden="true"><svg class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d={icons[0]} /></svg></span>
+            <h3 class="mt-5 text-2xl font-extrabold">{blueprint.title}</h3>
+            <p class="mt-2 max-w-lg text-ink/80">{blueprint.text}</p>
+            <!-- 6 tháng: 3 tháng đầu đậm, 3 tháng sau nhạt -->
+            <ol class="mt-7 grid grid-cols-6 gap-1.5" aria-label="Lộ trình 3 đến 6 tháng">
+              {Array.from({ length: 6 }, (_, i) => (
+                <li class="text-center">
+                  <span class:list={['block h-3 rounded-full', i < 3 ? 'bg-azure' : 'bg-azure/25']}></span>
+                  <span class="mt-2 block text-xs font-bold text-ink/60">Tháng {i + 1}</span>
+                </li>
+              ))}
+            </ol>
+          </article>
+
+          <article class="rounded-[2rem] bg-white p-7 ring-1 ring-sky/40 sm:p-9">
+            <span class="grid size-12 place-items-center rounded-2xl bg-azure text-white" aria-hidden="true"><svg class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d={icons[1]} /></svg></span>
+            <h3 class="mt-5 text-2xl font-extrabold">{live.title}</h3>
+            <p class="mt-2 text-ink/80">{live.text}</p>
+            <ol class="mt-7 flex gap-2" aria-label="4 tuần live coaching">
+              {Array.from({ length: 4 }, (_, i) => (
+                <li class="grid size-11 place-items-center rounded-full bg-baby text-xs font-extrabold text-glow ring-1 ring-sky/40">T{i + 1}</li>
+              ))}
+            </ol>
+          </article>
+
+          {[
+            { g: daily, icon: icons[2] },
+            { g: tools, icon: icons[3] },
+            { g: presence, icon: moreIcons.presence },
+            { g: script, icon: moreIcons.script },
+          ].filter((t) => t.g).map(({ g, icon }) => (
+            <article class="rounded-[2rem] bg-white p-7 ring-1 ring-sky/40 sm:p-9">
+              <span class="grid size-12 place-items-center rounded-2xl bg-azure text-white" aria-hidden="true"><svg class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d={icon} /></svg></span>
+              <h3 class="mt-5 text-2xl font-extrabold">{g.title}</h3>
+              <p class="mt-2 text-ink/80">{g.text}</p>
+            </article>
+          ))}
+
+          {scale && (
+            <article class="rounded-[2rem] bg-white p-7 ring-1 ring-sky/40 sm:p-9">
+              <!-- 3 bước tăng dần: đúng là một chuỗi nên đánh số -->
+              <ol class="flex h-14 items-end gap-1.5" aria-hidden="true">
+                {[1, 2, 3].map((n) => (
+                  <li class="grid w-10 place-items-center rounded-t-xl bg-azure text-sm font-extrabold text-white" style={`height:${40 + (n - 1) * 30}%`}>{n}</li>
+                ))}
+              </ol>
+              <h3 class="mt-5 text-2xl font-extrabold">{scale.title}</h3>
+              <p class="mt-2 text-ink/80">{scale.text}</p>
+            </article>
+          )}
+
+          <article class="flex flex-col justify-between rounded-[2rem] bg-gold p-7 text-deep sm:p-9">
+            <p class="text-6xl font-extrabold tracking-tight">100%</p>
+            <div>
+              <h3 class="mt-6 text-2xl font-extrabold !text-deep">{refund.title}</h3>
+              <p class="mt-2 font-semibold text-deep/80">{refund.text}</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Phần mềm quản lý: khối tối với ảnh thật -->
+        <div class="theme-dark mt-4 grid gap-10 overflow-hidden rounded-[2.5rem] px-6 py-10 sm:px-10 sm:py-12 lg:grid-cols-[0.75fr_1.25fr] lg:items-center">
+          <div>
+            <h3 class="text-2xl font-extrabold sm:text-3xl">{software.title}</h3>
+            <p class="mt-3 text-lg text-ink/80">{software.text} Đây là phần mềm Evad English đang dùng cho chính các lớp của mình.</p>
+            <p class="mt-6 text-sm text-ink/60">Bấm vào ảnh để xem rõ.</p>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            {appShots.map((shot, i) => (
+              <button type="button" data-zoom={zoomed[i].src} data-alt={shot.alt} aria-label={`Phóng to ảnh: ${shot.alt}`}
+                class:list={['group overflow-hidden rounded-2xl bg-white ring-1 ring-white/20 transition hover:ring-glow', i === 0 && 'col-span-2']}>
+                <Image src={shot.src} alt={shot.alt} widths={[480, 900]} sizes="(min-width: 1024px) 640px, 100vw"
+                  class="block h-auto w-full transition duration-500 group-hover:scale-[1.02]" loading="lazy" />
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- Học phí và cam kết -->
+      <section id="hoc-phi" aria-labelledby="hoc-phi-h" class="relative grid gap-10 overflow-hidden rounded-[2.5rem] bg-white p-7 ring-1 ring-sky/40 sm:p-12 lg:grid-cols-[1fr_auto] lg:items-center">
+        <div>
+          <h2 id="hoc-phi-h" class="text-base font-bold text-ink/70">Học phí</h2>
+          <!-- Giá gốc bị gạch khi cuộn tới, rồi giá mới hiện lên (fx.ts gắn lớp .struck) -->
+          <div class="price-drop" data-strike>
+            {coaching.originalPrice && (
+              <p class="mt-3 flex flex-wrap items-center gap-3">
+                <span class="text-sm font-bold text-ink/60">Giá gốc</span>
+                <del class="strike relative text-2xl font-bold text-ink/50 sm:text-3xl">{vnd(coaching.originalPrice)}</del>
+                <span class="price-badge rounded-full bg-[#e5484d] px-3 py-1 text-xs font-extrabold text-white">Tiết kiệm {vnd(coaching.originalPrice - coaching.price)}</span>
+              </p>
+            )}
+            <p class="price-new mt-1 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+              <span class="text-5xl font-extrabold tracking-tight text-heading sm:text-6xl">{vnd(coaching.price)}</span>
+              <span class="text-xl font-bold text-ink/70">{coaching.priceUnit}</span>
+            </p>
+          </div>
+          <p class="mt-6 flex items-start gap-3 text-lg font-semibold text-heading">
+            <svg class="mt-1 size-5 shrink-0 text-gold-deep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z" /><path d="M9 12l2 2 4-4" /></svg>
+            {coaching.guarantee}
+          </p>
+          <!-- Gợi ý học thử: nằm ngay dưới giá để người xem thấy có cách giảm học phí -->
+          <div class="mt-6 flex max-w-xl items-start gap-4 rounded-2xl bg-baby p-5 ring-1 ring-sky/50">
+            <span class="grid size-10 shrink-0 place-items-center rounded-full bg-azure text-white" aria-hidden="true">
+              <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v8H4v-8M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 1 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 1 0 0-5C13 2 12 7 12 7z" /></svg>
+            </span>
+            <p class="leading-relaxed text-ink/85"><strong class="text-heading">{coaching.trial.title}</strong> {coaching.trial.text}</p>
+          </div>
+          <div class="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <a {...cta} class="btn btn-cta" data-magnetic>Nhắn Zalo đăng ký coaching</a>
+            <a {...cta} class="btn btn-ghost">Đăng ký Trial Coaching</a>
+          </div>
+        </div>
+
+        <!-- Con dấu cam kết -->
+        <div class="relative mx-auto grid size-56 place-items-center sm:size-64" aria-hidden="true">
+          <svg class="seal absolute inset-0 size-full text-glow" viewBox="0 0 200 200">
+            <defs><path id="seal-ring" d="M100 100m-78 0a78 78 0 1 1 156 0a78 78 0 1 1 -156 0" /></defs>
+            <text class="fill-current text-[15px] font-extrabold" textLength="486" lengthAdjust="spacing"><textPath href="#seal-ring">HOÀN TIỀN 100% ✦ CAM KẾT CÓ HỌC VIÊN ✦</textPath></text>
+          </svg>
+          <div class="grid size-32 place-items-center rounded-full bg-gold text-center text-deep shadow-[0_20px_40px_-16px_rgb(245_185_58/0.8)] ring-8 ring-gold/25 sm:size-36">
+            <span>
+              <span class="block text-4xl font-extrabold leading-none sm:text-5xl">100%</span>
+              <span class="mt-1 block text-sm font-bold">hoàn tiền</span>
+            </span>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</Base>

@@ -275,3 +275,31 @@ details[open] .faq-body { animation: rise 0.35s cubic-bezier(.2,.7,.2,1); }
 }
 @keyframes border-sheen { from { background-position: 150% 0; } to { background-position: -150% 0; } }
 @media (prefers-reduced-motion: reduce) { .hero-window::after { animation: none; opacity: 0; } }
+
+/* Trang coaching: đếm số việc đã tick trong checklist, con dấu xoay chậm */
+.todo { counter-reset: done; }
+.todo input:checked { counter-increment: done; }
+.todo-count::before { content: counter(done); }
+.seal { animation: spin 40s linear infinite; }
+@keyframes spin { to { rotate: 360deg; } }
+@media (prefers-reduced-motion: reduce) { .seal { animation: none; } }
+
+/* Giá gốc bị gạch đỏ, rồi giá mới và nhãn tiết kiệm hiện lên. Không có JS thì hiện sẵn trạng thái cuối. */
+.strike { text-decoration: none; }
+.strike::after {
+  content: "";
+  position: absolute;
+  left: -6%;
+  right: -6%;
+  top: 52%;
+  height: 3px;
+  border-radius: 9999px;
+  background: #e5484d;
+  rotate: -8deg;
+  transform-origin: left;
+  transition: scale 0.6s cubic-bezier(.6,0,.2,1) 0.2s;
+}
+.price-new, .price-badge { transition: opacity 0.5s ease 0.8s, translate 0.5s cubic-bezier(.2,.7,.2,1) 0.8s, scale 0.5s cubic-bezier(.3,1.6,.5,1) 0.8s; }
+html.js .price-drop:not(.struck) .strike::after { scale: 0 1; }
+html.js .price-drop:not(.struck) .price-new { opacity: 0; translate: 0 0.75rem; }
+html.js .price-drop:not(.struck) .price-badge { opacity: 0; scale: 0.6; }

@@ -115,6 +115,17 @@ function init() {
   updateProgress();
   startRotator();
 
+  // Gạch giá gốc khi khối giá cuộn vào màn hình
+  document.querySelectorAll<HTMLElement>('[data-strike]').forEach((el) => {
+    if (reduce || !('IntersectionObserver' in window)) return el.classList.add('struck');
+    const io = new IntersectionObserver(([en]) => {
+      if (!en.isIntersecting) return;
+      el.classList.add('struck');
+      io.disconnect();
+    }, { threshold: 0.6 });
+    io.observe(el);
+  });
+
   const first = document.querySelector<HTMLElement>('[data-tier]');
   if (first) selectTier(first.dataset.tier!);
 

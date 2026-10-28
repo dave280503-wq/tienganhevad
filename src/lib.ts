@@ -6,7 +6,7 @@ type Course = CollectionEntry<'courses'>['data'];
 export const ctaHref = site.zaloUrl || '/lien-he';
 export const ctaExternal = Boolean(site.zaloUrl);
 
-const vnd = (n: number) => n.toLocaleString('vi-VN') + 'đ';
+export const vnd = (n: number) => n.toLocaleString('vi-VN') + 'đ';
 
 export function priceLabel(c: Course): { main: string; note?: string } {
   if (c.priceType === 'session' && c.price) {
@@ -42,4 +42,5 @@ export const nav = [
   { href: '/doi-ngu-giao-vien', label: 'Đội ngũ giáo viên' },
   { href: '/danh-gia', label: 'Đánh giá' },
   { href: '/tim-khoa-hoc', label: 'Tìm khóa theo ngân sách' },
+  { href: '/coaching-giao-vien', label: 'Coaching giáo viên' },
 ];

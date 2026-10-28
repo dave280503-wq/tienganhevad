@@ -1,4 +1,4 @@
-Ở chi tiết các khóa học, trình bày theo:
+Ở chi tiết các khóa học, trình bày theo: (nếu có đủ cả 4 thông tin, ko thì sáng tạo cách trình bày)
 
 1. Đầu vào - Khóa học phù hợp với những ai
 2. Đàu ra - Bạn sẽ nhận được những gì sau khóa
@@ -86,4 +86,33 @@ Tự học có hướng dẫn
 * Được cung cấp tài liệu qua phần mềm học của lớp
 * Được hướng dẫn tự học, bài tập ôn luyện mỗi tuần kèm feedback
 * học phí: 99k/tuần
+
+5\. Coaching giáo viên 1-1
+
+đầu trang chỉ ra các ưu điểm như: to-do list everyday, cam kết kiếm được học viên, hoàn tiền 100% nếu không
+
+* Bạn muốn kinh doanh từ dịch vụ giảng dạy/gia sư của mình
+* Chưa hiểu thị trường, không biết cách khai thác
+* Thiếu các công cụ hỗ trợ
+* Chưa có chuyên môn sales/marketing
+
+Coaching sẽ giúp bạn
+
+* Có được "blueprints" sẽ làm gì trong 3-6 tháng tới để đi xa với dịch vụ dạy học
+* Live coaching hàng tuần trong 1 tháng liên tục
+* Cầm tay chỉ việc, checklist everyday
+* Các công cụ hỗ trợ tạo phần mềm quản lí học viên, lên giáo trình, tạo content
+* &#x20; - Xuất hiện đúng nơi học viên có mặt
+* &#x20; - kịch bản chốt học viên/phụ huynh
+* &#x20; - bước 1-2-3 để scale dịch vụ dạy học lâu dài
+* Được cung cấp phần mềm hỗ trợ quản lí (chèn các ảnh Software vào)
+* Hoàn tiền 100% nếu bạn không kiếm được học viên
+
+Học phí
+
+4.168.000 cho 3 tháng
+
+Cam kết hoàn tiền 100% nếu không kiếm dc học viên
+
+Liên hệ để đăng kí buổi Coaching Trial
 
