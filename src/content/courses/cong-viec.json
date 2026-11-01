@@ -1,11 +1,11 @@
 {
   "order": 3,
   "title": "Tiếng Anh chốn công sở",
-  "summary": "8 buổi, 8 chủ đề công sở. Có sẵn cấu trúc câu để tự tin giao tiếp trong công việc.",
+  "summary": "Lộ trình 2 tháng với các chủ đề nơi làm việc. Có sẵn mẫu câu để tự tin giao tiếp trong công việc.",
   "audience": "Nền tảng cơ bản (A1–A1+)",
   "cover": "../../assets/founder/duy-teaching.jpg",
   "coverPosition": "center 25%",
-  "highlights": ["Kèm 1-1 với giáo viên", "8 buổi, 8 chủ đề công sở", "60 phút mỗi buổi, 2 buổi mỗi tuần", "Lịch học theo giờ rảnh của bạn"],
+  "highlights": ["Kèm 1-1 với giáo viên", "Lộ trình 2 tháng", "60 phút mỗi buổi, 2 buổi mỗi tuần", "Lịch học theo giờ rảnh của bạn"],
   "priceType": "session",
   "originalPrice": 289000,
   "price": 168000,
@@ -28,16 +28,22 @@
   ],
   "roadmap": [
     {
-      "title": "8 buổi, 8 chủ đề tiếng Anh công sở",
+      "title": "Lộ trình 2 tháng",
       "items": [
-        "8 chủ đề thông dụng, dễ áp dụng",
-        "Các cặp âm IPA dễ gây nhầm lẫn để cải thiện phát âm",
-        "Các chunks và slang dùng ngay trong giao tiếp",
-        "Được nói và sửa trực tiếp ngay trên lớp",
-        "Bài tập và feedback hàng tuần để ôn luyện liên tục"
+        "Các chủ đề sử dụng nơi làm việc",
+        "Các mẫu câu dùng ngay",
+        "Các cặp âm IPA để rèn phát âm",
+        "Được lựa chọn học bổ trợ viết EMAIL hoặc bổ trợ NGỮ PHÁP"
+      ],
+      "images": [
+        { "src": "../../assets/lessons/cs-tu-vung.png", "alt": "Từ vựng nơi làm việc: colleague, department, kèm ví dụ và câu hỏi luyện nói" },
+        { "src": "../../assets/lessons/cs-mau-cau.png", "alt": "Mẫu câu dùng ngay: I work in the … department, I'm in charge of …, I joined …" },
+        { "src": "../../assets/lessons/cs-phat-am-l-r.png", "alt": "Phát âm: phân biệt âm /l/ và âm /r/" },
+        { "src": "../../assets/lessons/cs-speaking.png", "alt": "Nói theo chủ đề: giới thiệu bản thân với đồng nghiệp mới" }
       ]
     }
   ],
+  "callout": "Đặc biệt: Chỉ đóng học phí theo tháng, không đóng cả lộ trình, hỗ trợ đóng theo buổi nếu có nhu cầu",
   "feeNotes": [
     "Học cùng đội ngũ giáo viên được đào tạo bài bản, mỗi tuần 2 buổi",
     "Kèm 1-1, lịch học linh động, sắp xếp theo lịch rảnh của học viên"
