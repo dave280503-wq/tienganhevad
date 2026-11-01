@@ -28,15 +28,17 @@
   ],
   "roadmap": [
     {
-      "title": "Tháng 1–2: Getting started",
-      "text": "Mỗi tuần được học:",
+      "title": "Tháng 1–2: Getting Started",
       "items": [
-        "1 chủ đề thông dụng, dễ áp dụng",
+        "Các chủ đề sử dụng hàng ngày",
+        "Các mẫu câu dùng ngay trong giao tiếp",
         "Các cặp âm IPA dễ gây nhầm lẫn để cải thiện phát âm",
-        "Các chunks và slang dùng ngay trong giao tiếp",
-        "Được nói và sửa trực tiếp ngay trên lớp",
-        "Bài tập và feedback hàng tuần để ôn luyện liên tục",
-        "4 bộ ngữ pháp bổ trợ việc nói tiếng Anh"
+        "Được bổ trợ ngữ pháp HOÀN TOÀN MIỄN PHÍ nếu có nhu cầu"
+      ],
+      "images": [
+        { "src": "../../assets/lessons/mau-cau.png", "alt": "Mẫu câu dùng ngay: Useful Chunks và Speaking Structures" },
+        { "src": "../../assets/lessons/cum-tu-catch-up.png", "alt": "Cụm từ thông dụng: catch up, kèm ví dụ và câu luyện nói" },
+        { "src": "../../assets/lessons/phat-am-i.png", "alt": "Phát âm: phân biệt âm /iː/ và âm /ɪ/" }
       ]
     },
     {
@@ -50,9 +52,9 @@
       ]
     }
   ],
+  "callout": "Đặc biệt: Chỉ đóng học phí theo tháng, không đóng cả lộ trình, hỗ trợ đóng theo buổi nếu có nhu cầu",
   "feeNotes": [
     "Học cùng đội ngũ giáo viên được đào tạo bài bản, mỗi tuần 2 buổi",
-    "Kèm 1-1, lịch học linh động, sắp xếp theo lịch rảnh của học viên",
-    "Đặc biệt: chỉ đóng học phí theo tháng, không đóng cả lộ trình"
+    "Kèm 1-1, lịch học linh động, sắp xếp theo lịch rảnh của học viên"
   ]
 }

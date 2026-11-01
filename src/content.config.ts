@@ -31,10 +31,17 @@ const courses = defineCollection({
     entry: z.array(z.string()).default([]),
     // 2. Đầu ra
     outcome: z.array(z.string()).default([]),
-    // 3. Lộ trình: mỗi giai đoạn có tên, mô tả ngắn (tùy chọn) và các ý
+    // 3. Lộ trình: mỗi giai đoạn có tên, mô tả ngắn (tùy chọn), các ý và ảnh minh họa bài học (tùy chọn)
     roadmap: z
-      .array(z.object({ title: z.string(), text: z.string().default(''), items: z.array(z.string()).default([]) }))
+      .array(z.object({
+        title: z.string(),
+        text: z.string().default(''),
+        items: z.array(z.string()).default([]),
+        images: z.array(z.object({ src: image(), alt: z.string() })).default([]),
+      }))
       .default([]),
+    // Dòng nổi bật hiện ngay sau lộ trình
+    callout: z.string().default(''),
     // 4. Học phí: các ý đi kèm giá
     feeNotes: z.array(z.string()).default([]),
   }),

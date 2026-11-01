@@ -30,6 +30,10 @@ const appShots = [
   { src: appNotes, alt: 'Lưu ý của giáo viên, tài liệu học và thống kê buổi học' },
 ];
 const zoomed = await Promise.all(appShots.map((s) => getImage({ src: s.src, width: 1600 })));
+// Ảnh minh họa trong lộ trình: bản phóng to giữ nguyên kích thước gốc
+const phaseZoom = await Promise.all(
+  c.roadmap.map((p) => Promise.all(p.images.map(async (img) => (await getImage({ src: img.src })).src))),
+);
 const appFeatures = [
   'Xem lịch học và vào lớp Teams chỉ với một lần bấm',
   'Nhận tài liệu, nộp bài tập về nhà',
@@ -138,19 +142,43 @@ const check = 'M5 12l5 5L20 7';
                     {phase.text && <p class="mt-2 text-ink/70">{phase.text}</p>}
                   </div>
                 </div>
-                {phase.items.length > 0 && (
-                  <ul class="grid gap-x-8 gap-y-4 sm:grid-cols-2">
-                    {phase.items.map((item) => (
-                      <li class="flex items-start gap-3 text-ink/90">
-                        <svg class="mt-1 size-4 shrink-0 text-glow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={check} /></svg>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
+                <div>
+                  {phase.items.length > 0 && (
+                    <ul class="grid gap-x-8 gap-y-4 sm:grid-cols-2">
+                      {phase.items.map((item) => (
+                        <li class="flex items-start gap-3 text-ink/90">
+                          <svg class="mt-1 size-4 shrink-0 text-glow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={check} /></svg>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  {phase.images.length > 0 && (
+                    <figure class="mt-8">
+                      <figcaption class="text-sm font-bold text-ink/60">Ví dụ trong bài học (bấm để xem rõ)</figcaption>
+                      <div class="mt-3 grid gap-3 sm:grid-cols-2">
+                        {phase.images.map((img, k) => (
+                          <button type="button" data-zoom={phaseZoom[i][k]} data-alt={img.alt} aria-label={`Phóng to: ${img.alt}`}
+                            class:list={['group overflow-hidden rounded-2xl bg-white p-2 shadow-card ring-1 ring-sky/40 transition hover:-translate-y-1 hover:shadow-lift',
+                              phase.images.length === 3 && k === 2 && 'sm:col-start-2 sm:row-span-2 sm:row-start-1 sm:self-center']}>
+                            <Image src={img.src} alt={img.alt} width={img.src.width} class="block h-auto w-full rounded-xl" loading="lazy" />
+                          </button>
+                        ))}
+                      </div>
+                    </figure>
+                  )}
+                </div>
               </li>
             ))}
           </ol>
+          {c.callout && (
+            <div class="mt-10 flex items-start gap-4 rounded-[1.75rem] bg-gold p-6 text-deep shadow-[0_18px_40px_-20px_rgb(245_185_58/0.9)] sm:items-center sm:p-7">
+              <span class="grid size-11 shrink-0 place-items-center rounded-full bg-deep text-gold" aria-hidden="true">
+                <svg class="size-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7.1L12 17.3 5.8 21l1.6-7.1L2 9.2l7.1-.6z" /></svg>
+              </span>
+              <p class="text-lg font-bold leading-snug sm:text-xl">{c.callout}</p>
+            </div>
+          )}
         </section>
       )}
 
