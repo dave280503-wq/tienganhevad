@@ -36,9 +36,10 @@
         "Được bổ trợ ngữ pháp HOÀN TOÀN MIỄN PHÍ nếu có nhu cầu"
       ],
       "images": [
-        { "src": "../../assets/lessons/mau-cau.png", "alt": "Mẫu câu dùng ngay: Useful Chunks và Speaking Structures" },
-        { "src": "../../assets/lessons/cum-tu-catch-up.png", "alt": "Cụm từ thông dụng: catch up, kèm ví dụ và câu luyện nói" },
-        { "src": "../../assets/lessons/phat-am-i.png", "alt": "Phát âm: phân biệt âm /iː/ và âm /ɪ/" }
+        { "src": "../../assets/lessons/mau-cau.png", "alt": "Mẫu câu dùng ngay: Useful Chunks và Speaking Structures", "caption": "Mẫu câu thực tế kèm ví dụ, áp dụng ngay" },
+        { "src": "../../assets/lessons/cum-tu-catch-up.png", "alt": "Cụm từ thông dụng: catch up, kèm ví dụ và câu luyện nói", "caption": "Từ vựng đúng với chủ đề, kèm ví dụ để hiểu và thực hành ngay" },
+        { "src": "../../assets/lessons/phat-am-i.png", "alt": "Phát âm: phân biệt âm /iː/ và âm /ɪ/", "caption": "Phân biệt các cặp âm dễ nhầm lẫn với hướng dẫn chi tiết" },
+        { "src": "../../assets/lessons/speaking-friend.png", "alt": "Nói theo chủ đề: kể về một người bạn thân", "caption": "Thực hành nói ngay với những topic nhỏ" }
       ]
     },
     {

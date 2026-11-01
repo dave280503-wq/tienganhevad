@@ -36,10 +36,10 @@
         "Được lựa chọn học bổ trợ viết EMAIL hoặc bổ trợ NGỮ PHÁP"
       ],
       "images": [
-        { "src": "../../assets/lessons/cs-tu-vung.png", "alt": "Từ vựng nơi làm việc: colleague, department, kèm ví dụ và câu hỏi luyện nói" },
-        { "src": "../../assets/lessons/cs-mau-cau.png", "alt": "Mẫu câu dùng ngay: I work in the … department, I'm in charge of …, I joined …" },
-        { "src": "../../assets/lessons/cs-phat-am-l-r.png", "alt": "Phát âm: phân biệt âm /l/ và âm /r/" },
-        { "src": "../../assets/lessons/cs-speaking.png", "alt": "Nói theo chủ đề: giới thiệu bản thân với đồng nghiệp mới" }
+        { "src": "../../assets/lessons/cs-tu-vung.png", "alt": "Từ vựng nơi làm việc: colleague, department, kèm ví dụ và câu hỏi luyện nói", "caption": "Từ vựng đúng với chủ đề, kèm ví dụ để hiểu và thực hành ngay" },
+        { "src": "../../assets/lessons/cs-mau-cau.png", "alt": "Mẫu câu dùng ngay: I work in the … department, I'm in charge of …, I joined …", "caption": "Mẫu câu thực tế kèm ví dụ, áp dụng ngay" },
+        { "src": "../../assets/lessons/cs-phat-am-l-r.png", "alt": "Phát âm: phân biệt âm /l/ và âm /r/", "caption": "Phân biệt các cặp âm dễ nhầm lẫn với hướng dẫn chi tiết" },
+        { "src": "../../assets/lessons/cs-speaking.png", "alt": "Nói theo chủ đề: giới thiệu bản thân với đồng nghiệp mới", "caption": "Luyện nói theo tình huống thực tế nơi làm việc" }
       ]
     }
   ],

@@ -37,7 +37,8 @@ const courses = defineCollection({
         title: z.string(),
         text: z.string().default(''),
         items: z.array(z.string()).default([]),
-        images: z.array(z.object({ src: image(), alt: z.string() })).default([]),
+        // caption: dòng ghi chú hiện ngay dưới ảnh
+        images: z.array(z.object({ src: image(), alt: z.string(), caption: z.string().default('') })).default([]),
       }))
       .default([]),
     // Dòng nổi bật hiện ngay sau lộ trình
