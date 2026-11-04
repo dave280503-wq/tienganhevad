@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import CtaBand from '../components/CtaBand.astro';
@@ -7,6 +7,18 @@ import team from '../assets/team/team-group.jpg';
 import about from '../content/about.json';
 
 const check = 'M5 12l5 5L20 7';
+
+// Ảnh feedback nằm trong src/assets/teacher-feedback, about.json chỉ ghi tên file
+const shots = import.meta.glob<{ default: ImageMetadata }>('../assets/teacher-feedback/*', { eager: true });
+const fb = about.teachers.feedback;
+const fbShots = await Promise.all(
+  fb.images.map(async (name) => {
+    const src = shots[`../assets/teacher-feedback/${name}`].default;
+    return { src, full: (await getImage({ src, width: 1100 })).src };
+  }),
+);
+// Mỗi ảnh nghiêng nhẹ một chút cho giống ảnh ghim lên bảng
+const tilts = ['-rotate-2', 'rotate-2', 'rotate-1', '-rotate-1'];
 ---
 <Base title="Đội ngũ giáo viên" description="Giáo viên Evad English có kinh nghiệm giảng dạy, bằng cấp tiếng Anh và được đào tạo bài bản để dạy ngoại ngữ.">
   <PageHero title="Đội ngũ giáo viên" cover={team} coverPosition="center 30%"
@@ -34,6 +46,41 @@ const check = 'M5 12l5 5L20 7';
           <figcaption class="mt-3 text-sm font-semibold text-ink/70">Ngày nhận chứng chỉ TESOL</figcaption>
         </figure>
       </div>    </div>
+
+    <!-- Feedback chung về giáo viên: chữ bên trái, ảnh tin nhắn ghim bên phải -->
+    <section class="wrap section !pt-8">
+      <div class="theme-dark relative overflow-hidden rounded-[2.5rem] px-5 py-10 sm:px-10 sm:py-14 lg:px-14">
+        <div class="pointer-events-none absolute -left-24 -top-24 size-80 rounded-full bg-azure/40 blur-3xl" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute -bottom-32 -right-20 size-96 rounded-full bg-gold/15 blur-3xl" aria-hidden="true"></div>
+        <div class="relative grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:gap-14">
+          <div>
+            <p class="text-sm font-bold uppercase tracking-[0.18em] text-gold">Tin nhắn thật sau buổi học</p>
+            <h2 class="h-section mt-3">{fb.title}</h2>
+            <p class="mt-5 text-lg leading-relaxed opacity-85">{fb.text}</p>
+            <ul class="mt-7 flex flex-wrap gap-2.5">
+              {fb.highlights.map((h) => (
+                <li class="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-bold ring-1 ring-white/20 backdrop-blur">
+                  <svg class="size-4 text-gold" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7-4.4-9.5-9C.8 8.6 3 5 6.5 5c2 0 3.5 1.2 5.5 3.2C14 6.2 15.5 5 17.5 5 21 5 23.2 8.6 21.5 12 19 16.6 12 21 12 21z" /></svg>
+                  {h}
+                </li>
+              ))}
+            </ul>
+            <p class="mt-7 flex items-center gap-2 text-sm font-semibold opacity-60">
+              <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5M11 8v6M8 11h6" /></svg>
+              Bấm vào ảnh để xem rõ
+            </p>
+          </div>
+          <div class="columns-2 gap-4 sm:gap-5">
+            {fbShots.map((s, i) => (
+              <button type="button" data-zoom={s.full} data-alt="Tin nhắn feedback của học viên về giáo viên" aria-label="Phóng to tin nhắn feedback"
+                class:list={['mb-4 block w-full break-inside-avoid rounded-2xl bg-white p-1.5 shadow-lift ring-1 ring-black/5 transition duration-300 hover:z-10 hover:rotate-0 hover:scale-[1.04] sm:mb-5 sm:p-2', tilts[i % tilts.length], i === 1 && 'mt-6 sm:mt-10']}>
+                <Image src={s.src} alt="Tin nhắn feedback của học viên về giáo viên" width={560} class="block h-auto w-full rounded-xl" loading="lazy" />
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
     <CtaBand />
   </div>
 </Base>

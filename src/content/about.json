@@ -21,6 +21,12 @@
       "Bằng cấp tiếng Anh xịn xò",
       "Được đào tạo bài bản để dạy ngoại ngữ",
       "Được kiểm tra đầu vào rất khắt khe để đảm bảo chất lượng"
-    ]
+    ],
+    "feedback": {
+      "title": "Học viên nói gì về giáo viên",
+      "text": "Sau buổi học đầu tiên, Evad English luôn hỏi lại học viên xem học với giáo viên có hợp không. Đây là những tin nhắn trả lời thật.",
+      "highlights": ["Dạy tận tâm", "Giảng ngữ pháp dễ hiểu", "Chuyên nghiệp, đúng trọng tâm", "Thân thiện, dễ gần"],
+      "images": ["tf-1.png", "tf-3.png", "tf-2.png", "tf-4.png"]
+    }
   }
 }
