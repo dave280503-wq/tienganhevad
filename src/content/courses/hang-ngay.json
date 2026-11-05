@@ -2,7 +2,7 @@
   "order": 2,
   "title": "Nói tiếng Anh hàng ngày",
   "summary": "Hết ngập ngừng khi nói. Dùng ngay cấu trúc câu, slang và cụm từ tự nhiên trong giao tiếp đời thường.",
-  "audience": "Nền tảng cơ bản (A1–A1+)",
+  "audience": "Nền tảng cơ bản (A1+–A2)",
   "cover": "../../assets/founder/duy-work.jpg",
   "coverPosition": "70% 40%",
   "highlights": ["Kèm 1-1 với giáo viên", "Lộ trình 3 tháng", "60 phút mỗi buổi, 2 buổi mỗi tuần", "Đóng học phí theo tháng"],
@@ -12,7 +12,7 @@
   "sessionMinutes": 60,
   "sessionsPerWeek": 2,
   "billing": "tháng",
-  "entryLevel": "Nền tảng cơ bản (A1–A1+)",
+  "entryLevel": "Nền tảng cơ bản (A1+–A2)",
   "entry": [
     "Biết từ vựng nhưng không dùng được",
     "Không hiểu, không dùng được slang và các cụm thông dụng",
@@ -50,6 +50,12 @@
         "Mài giũa ngữ điệu câu và phát âm",
         "Các chuyên đề ngữ pháp bổ trợ nói",
         "Các cặp âm IPA dễ gây nhầm lẫn để mài giũa phát âm"
+      ],
+      "images": [
+        { "src": "../../assets/lessons/adv-slang.png", "alt": "Slang: I'm beat, kèm phiên âm, nghĩa, ví dụ và câu hỏi luyện nói", "caption": "Slang người bản xứ dùng hằng ngày, kèm nghĩa và ví dụ" },
+        { "src": "../../assets/lessons/adv-reductions.png", "alt": "Nói nối: gonna, wanna, gotta, dunno, lemme, gimme kèm phiên âm và ví dụ", "caption": "Cách nói nối tự nhiên: gonna, wanna, gotta…" },
+        { "src": "../../assets/lessons/adv-read-aloud.png", "alt": "Read Out Loud: đọc theo giáo viên 3 lần, mỗi lần nhanh hơn", "caption": "Đọc to theo giáo viên để luyện ngữ điệu và tốc độ" },
+        { "src": "../../assets/lessons/adv-roleplay.png", "alt": "Roleplay: làm quen người mới ở bữa tiệc, học viên và giáo viên nhập vai", "caption": "Nhập vai tình huống thật cùng giáo viên" }
       ]
     }
   ],

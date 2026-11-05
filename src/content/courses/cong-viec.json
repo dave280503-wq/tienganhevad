@@ -2,7 +2,7 @@
   "order": 3,
   "title": "Tiếng Anh chốn công sở",
   "summary": "Lộ trình 2 tháng với các chủ đề nơi làm việc. Có sẵn mẫu câu để tự tin giao tiếp trong công việc.",
-  "audience": "Nền tảng cơ bản (A1–A1+)",
+  "audience": "Nền tảng cơ bản (A1+–A2)",
   "cover": "../../assets/founder/duy-teaching.jpg",
   "coverPosition": "center 25%",
   "highlights": ["Kèm 1-1 với giáo viên", "Lộ trình 2 tháng", "60 phút mỗi buổi, 2 buổi mỗi tuần", "Lịch học theo giờ rảnh của bạn"],
@@ -12,7 +12,7 @@
   "sessionMinutes": 60,
   "sessionsPerWeek": 2,
   "billing": "tháng",
-  "entryLevel": "Nền tảng cơ bản (A1–A1+)",
+  "entryLevel": "Nền tảng cơ bản (A1+–A2)",
   "entry": [
     "Biết từ vựng nhưng không dùng được",
     "Không hiểu, không dùng được slang và các cụm thông dụng",
