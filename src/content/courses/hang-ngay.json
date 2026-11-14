@@ -5,7 +5,12 @@
   "audience": "Nền tảng cơ bản (A1+–A2)",
   "cover": "../../assets/founder/duy-work.jpg",
   "coverPosition": "70% 40%",
-  "highlights": ["Kèm 1-1 với giáo viên", "Lộ trình 3 tháng", "60 phút mỗi buổi, 2 buổi mỗi tuần", "Đóng học phí theo tháng"],
+  "highlights": [
+    "Kèm 1-1 với giáo viên",
+    "Lộ trình 3 tháng",
+    "60 phút mỗi buổi, 2 buổi mỗi tuần",
+    "Đóng học phí theo tháng"
+  ],
   "priceType": "session",
   "originalPrice": 289000,
   "price": 168000,
@@ -33,13 +38,30 @@
         "Các chủ đề sử dụng hàng ngày",
         "Các mẫu câu dùng ngay trong giao tiếp",
         "Các cặp âm IPA dễ gây nhầm lẫn để cải thiện phát âm",
-        "Được bổ trợ ngữ pháp HOÀN TOÀN MIỄN PHÍ nếu có nhu cầu"
+        "Được bổ trợ ngữ pháp HOÀN TOÀN MIỄN PHÍ nếu có nhu cầu",
+        "Được đánh giá và góp ý chi tiết từ các bài tập hàng tuần và test hàng tháng"
       ],
       "images": [
-        { "src": "../../assets/lessons/mau-cau.png", "alt": "Mẫu câu dùng ngay: Useful Chunks và Speaking Structures", "caption": "Mẫu câu thực tế kèm ví dụ, áp dụng ngay" },
-        { "src": "../../assets/lessons/cum-tu-catch-up.png", "alt": "Cụm từ thông dụng: catch up, kèm ví dụ và câu luyện nói", "caption": "Từ vựng đúng với chủ đề, kèm ví dụ để hiểu và thực hành ngay" },
-        { "src": "../../assets/lessons/phat-am-i.png", "alt": "Phát âm: phân biệt âm /iː/ và âm /ɪ/", "caption": "Phân biệt các cặp âm dễ nhầm lẫn với hướng dẫn chi tiết" },
-        { "src": "../../assets/lessons/speaking-friend.png", "alt": "Nói theo chủ đề: kể về một người bạn thân", "caption": "Thực hành nói ngay với những topic nhỏ" }
+        {
+          "src": "../../assets/lessons/mau-cau.png",
+          "alt": "Mẫu câu dùng ngay: Useful Chunks và Speaking Structures",
+          "caption": "Mẫu câu thực tế kèm ví dụ, áp dụng ngay"
+        },
+        {
+          "src": "../../assets/lessons/cum-tu-catch-up.png",
+          "alt": "Cụm từ thông dụng: catch up, kèm ví dụ và câu luyện nói",
+          "caption": "Từ vựng đúng với chủ đề, kèm ví dụ để hiểu và thực hành ngay"
+        },
+        {
+          "src": "../../assets/lessons/phat-am-i.png",
+          "alt": "Phát âm: phân biệt âm /iː/ và âm /ɪ/",
+          "caption": "Phân biệt các cặp âm dễ nhầm lẫn với hướng dẫn chi tiết"
+        },
+        {
+          "src": "../../assets/lessons/speaking-friend.png",
+          "alt": "Nói theo chủ đề: kể về một người bạn thân",
+          "caption": "Thực hành nói ngay với những topic nhỏ"
+        }
       ]
     },
     {
@@ -52,10 +74,26 @@
         "Các cặp âm IPA dễ gây nhầm lẫn để mài giũa phát âm"
       ],
       "images": [
-        { "src": "../../assets/lessons/adv-slang.png", "alt": "Slang: I'm beat, kèm phiên âm, nghĩa, ví dụ và câu hỏi luyện nói", "caption": "Slang người bản xứ dùng hằng ngày, kèm nghĩa và ví dụ" },
-        { "src": "../../assets/lessons/adv-reductions.png", "alt": "Nói nối: gonna, wanna, gotta, dunno, lemme, gimme kèm phiên âm và ví dụ", "caption": "Cách nói nối tự nhiên: gonna, wanna, gotta…" },
-        { "src": "../../assets/lessons/adv-read-aloud.png", "alt": "Read Out Loud: đọc theo giáo viên 3 lần, mỗi lần nhanh hơn", "caption": "Đọc to theo giáo viên để luyện ngữ điệu và tốc độ" },
-        { "src": "../../assets/lessons/adv-roleplay.png", "alt": "Roleplay: làm quen người mới ở bữa tiệc, học viên và giáo viên nhập vai", "caption": "Nhập vai tình huống thật cùng giáo viên" }
+        {
+          "src": "../../assets/lessons/adv-slang.png",
+          "alt": "Slang: I'm beat, kèm phiên âm, nghĩa, ví dụ và câu hỏi luyện nói",
+          "caption": "Slang người bản xứ dùng hằng ngày, kèm nghĩa và ví dụ"
+        },
+        {
+          "src": "../../assets/lessons/adv-reductions.png",
+          "alt": "Nói nối: gonna, wanna, gotta, dunno, lemme, gimme kèm phiên âm và ví dụ",
+          "caption": "Cách nói nối tự nhiên: gonna, wanna, gotta…"
+        },
+        {
+          "src": "../../assets/lessons/adv-read-aloud.png",
+          "alt": "Read Out Loud: đọc theo giáo viên 3 lần, mỗi lần nhanh hơn",
+          "caption": "Đọc to theo giáo viên để luyện ngữ điệu và tốc độ"
+        },
+        {
+          "src": "../../assets/lessons/adv-roleplay.png",
+          "alt": "Roleplay: làm quen người mới ở bữa tiệc, học viên và giáo viên nhập vai",
+          "caption": "Nhập vai tình huống thật cùng giáo viên"
+        }
       ]
     }
   ],

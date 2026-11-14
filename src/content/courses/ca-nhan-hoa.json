@@ -5,7 +5,12 @@
   "audience": "Mọi đầu vào",
   "cover": "../../assets/founder/duy-my.jpg",
   "coverPosition": "center 15%",
-  "highlights": ["Kèm 1-1 với giáo viên", "Mọi đầu vào", "Lộ trình thiết kế riêng", "Tư vấn 1-1 trước khi học"],
+  "highlights": [
+    "Kèm 1-1 với giáo viên",
+    "Mọi đầu vào",
+    "Lộ trình thiết kế riêng",
+    "Tư vấn 1-1 trước khi học"
+  ],
   "priceType": "contact",
   "budgetMin": 300000,
   "budgetMax": 500000,
@@ -20,7 +25,8 @@
     {
       "title": "Lộ trình thiết kế riêng",
       "items": [
-        "Liên hệ để được tư vấn 1-1 và lên kế hoạch lộ trình"
+        "Liên hệ để được tư vấn 1-1 và lên kế hoạch lộ trình",
+        "Được đánh giá và góp ý chi tiết từ các bài tập hàng tuần và test hàng tháng"
       ]
     }
   ],
