@@ -1,11 +1,16 @@
 {
   "order": 1,
   "title": "Nền tảng tiếng Anh",
-  "summary": "Bắt đầu từ con số 0. 8 buổi, 8 chủ điểm để lấy gốc và tự tin bắt đầu nói tiếng Anh.",
+  "summary": "Bắt đầu từ con số 0. Lộ trình 16 buổi trong 2 tháng để lấy gốc và tự tin bắt đầu nói tiếng Anh.",
   "audience": "Bắt đầu từ số 0",
   "cover": "../../assets/team/team-group.jpg",
   "coverPosition": "center 35%",
-  "highlights": ["Kèm 1-1 với giáo viên", "8 buổi, 8 chủ điểm", "60 phút mỗi buổi", "Lịch học theo giờ rảnh của bạn"],
+  "highlights": [
+    "Kèm 1-1 với giáo viên",
+    "Lộ trình 16 buổi, 2 tháng",
+    "60 phút mỗi buổi, 2 buổi mỗi tuần",
+    "Lịch học theo giờ rảnh của bạn"
+  ],
   "priceType": "session",
   "originalPrice": 289000,
   "price": 168000,
@@ -24,10 +29,39 @@
   ],
   "roadmap": [
     {
-      "title": "8 buổi, 8 chủ điểm để lấy gốc",
+      "title": "Lộ trình 16 buổi, 2 tháng",
       "items": [
-        "Học chuyên sâu các loại từ, giới từ, câu hỏi (Question), động từ to be, đại từ và cách đặt câu",
-        "Được hỗ trợ tài liệu từ vựng rất cơ bản để lấy gốc và tự tin nói tiếng Anh"
+        "Lấy gốc từ các khía cạnh cơ bản nhất của ngôn ngữ: chào hỏi, mô tả, số liệu, thông tin,...",
+        "Các ngữ pháp nền tảng để sử dụng tiếng Anh",
+        "Các mẫu câu nói để bắt chước theo, dễ nhớ dễ áp dụng",
+        "Phát âm cơ bản"
+      ],
+      "images": [
+        {
+          "src": "../../assets/lessons/nt-vocab.png",
+          "alt": "Từ vựng: student, country kèm phiên âm, nghĩa và câu ví dụ",
+          "caption": "Từ vựng cơ bản có hình minh họa, phiên âm và câu ví dụ"
+        },
+        {
+          "src": "../../assets/lessons/nt-grammar.png",
+          "alt": "Ngữ pháp: động từ to be am / is / are",
+          "caption": "Ngữ pháp nền tảng giải thích bằng tiếng Việt, dễ hiểu"
+        },
+        {
+          "src": "../../assets/lessons/nt-patterns.png",
+          "alt": "Mẫu câu: This is my…, I have… kèm ví dụ và phần tự luyện",
+          "caption": "Mẫu câu để bắt chước theo, thay từ là nói được ngay"
+        },
+        {
+          "src": "../../assets/lessons/nt-pronunciation.png",
+          "alt": "Phát âm: âm TH thổi hơi và TH rung",
+          "caption": "Phát âm cơ bản với hướng dẫn từng bước"
+        },
+        {
+          "src": "../../assets/lessons/nt-listen.png",
+          "alt": "Nghe và đọc theo: hội thoại ngắn có đánh dấu nhấn âm và ngữ điệu",
+          "caption": "Nghe giáo viên đọc rồi đọc theo để quen ngữ điệu"
+        }
       ]
     }
   ],
