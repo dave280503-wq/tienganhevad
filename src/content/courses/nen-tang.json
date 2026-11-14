@@ -62,6 +62,16 @@
           "src": "../../assets/lessons/nt-listen.png",
           "alt": "Nghe và đọc theo: hội thoại ngắn có đánh dấu nhấn âm và ngữ điệu",
           "caption": "Nghe giáo viên đọc rồi đọc theo để quen ngữ điệu"
+        },
+        {
+          "src": "../../assets/lessons/th-entrance-report.webp",
+          "alt": "Báo cáo kiểm tra đầu vào: điểm từng tiêu chí, điểm mạnh, điểm yếu và gợi ý cách học",
+          "caption": "Báo cáo chi tiết: điểm từng kỹ năng, điểm mạnh, điểm yếu và cách cải thiện"
+        },
+        {
+          "src": "../../assets/lessons/th-speaking-feedback.png",
+          "alt": "Báo cáo feedback bài nói: điểm từng tiêu chí, nhận xét chung và sửa lỗi từng câu",
+          "caption": "Góp ý bài nói: sửa từng câu, kèm câu mẫu để nói đúng hơn"
         }
       ]
     }

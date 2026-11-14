@@ -61,6 +61,16 @@
           "src": "../../assets/lessons/speaking-friend.png",
           "alt": "Nói theo chủ đề: kể về một người bạn thân",
           "caption": "Thực hành nói ngay với những topic nhỏ"
+        },
+        {
+          "src": "../../assets/lessons/th-entrance-report.webp",
+          "alt": "Báo cáo kiểm tra đầu vào: điểm từng tiêu chí, điểm mạnh, điểm yếu và gợi ý cách học",
+          "caption": "Báo cáo chi tiết: điểm từng kỹ năng, điểm mạnh, điểm yếu và cách cải thiện"
+        },
+        {
+          "src": "../../assets/lessons/th-speaking-feedback.png",
+          "alt": "Báo cáo feedback bài nói: điểm từng tiêu chí, nhận xét chung và sửa lỗi từng câu",
+          "caption": "Góp ý bài nói: sửa từng câu, kèm câu mẫu để nói đúng hơn"
         }
       ]
     },
