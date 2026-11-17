@@ -45,7 +45,7 @@ export const inTier = (c: Course, t: Tier) => {
 };
 
 export const nav = [
-  { href: '/#gioi-thieu', label: 'Giới thiệu' },
+  { href: '/', label: 'Giới thiệu' },
   { href: '/khoa-hoc', label: 'Các khóa học' },
   { href: '/doi-ngu-giao-vien', label: 'Đội ngũ giáo viên' },
   { href: '/danh-gia', label: 'Đánh giá' },

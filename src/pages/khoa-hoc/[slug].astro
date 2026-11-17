@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import { Image, getImage } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import PriceDrop from '../../components/PriceDrop.astro';
+import VideoCard from '../../components/VideoCard.astro';
 import { priceLabel, ctaHref, ctaExternal } from '../../lib';
 import appOverview from '../../assets/software/tong-quan.png';
 import appSchedule from '../../assets/software/lich-hoc.png';
@@ -69,34 +70,7 @@ const check = 'M5 12l5 5L20 7';
           <a href="#lo-trinh" class="btn btn-ghost">Xem lộ trình học</a>
         </div>
       </div>
-      {c.video && (
-        <figure class="video-card relative lg:mt-8">
-          <div class="pointer-events-none absolute -inset-6 -z-10 rounded-[3rem] bg-azure/30 blur-3xl" aria-hidden="true"></div>
-          <div class="relative overflow-hidden rounded-[1.75rem] bg-deep p-1.5 shadow-lift ring-1 ring-white/20">
-            <div class="relative aspect-video overflow-hidden rounded-[1.4rem] bg-deep">
-              <video class="block size-full object-cover" playsinline preload="none" poster={c.video.poster} data-intro-video>
-                <source src={c.video.src} type="video/mp4" />
-              </video>
-              <button type="button" data-video-play aria-label={`Phát video giới thiệu khóa ${c.title}`}
-                class="group absolute inset-0 bg-gradient-to-t from-deep/70 via-transparent to-transparent">
-                <span class="absolute bottom-4 left-4 inline-flex items-center gap-3 rounded-full bg-gold py-2 pl-2 pr-5 text-sm font-extrabold text-deep shadow-lift transition-transform duration-300 group-hover:scale-105 sm:bottom-5 sm:left-5 sm:text-base">
-                  <span class="relative grid size-9 place-items-center rounded-full bg-deep text-gold sm:size-10">
-                    <span class="absolute inset-0 animate-ping rounded-full bg-deep/30 motion-reduce:hidden" aria-hidden="true"></span>
-                    <svg class="relative ml-0.5 size-4 sm:size-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5z" /></svg>
-                  </span>
-                  Xem video giới thiệu
-                </span>
-              </button>
-            </div>
-          </div>
-          {c.video.caption && (
-            <figcaption class="mt-4 flex items-center gap-2 text-sm font-bold text-heading/80">
-              <span class="size-2 rounded-full bg-gold" aria-hidden="true"></span>
-              {c.video.caption}
-            </figcaption>
-          )}
-        </figure>
-      )}
+      {c.video && <VideoCard video={c.video} label={`Phát video giới thiệu khóa ${c.title}`} class="lg:mt-8" />}
       </div>
       {c.highlights.length > 0 && (
         <ul class="mt-12 grid max-w-3xl gap-x-8 gap-y-3 border-t border-white/15 pt-6 text-[0.95rem] font-semibold text-heading sm:grid-cols-2">
@@ -292,15 +266,3 @@ const check = 'M5 12l5 5L20 7';
 
 </Base>
 
-<script>
-  // Nút phát lớn đè lên video: bấm thì ẩn nút và phát video kèm tiếng
-  document.addEventListener('click', (e) => {
-    const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('[data-video-play]');
-    if (!btn) return;
-    const video = btn.parentElement?.querySelector<HTMLVideoElement>('[data-intro-video]');
-    if (!video) return;
-    btn.hidden = true;
-    video.controls = true;
-    video.play();
-  });
-</script>

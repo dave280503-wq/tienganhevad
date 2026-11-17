@@ -6,5 +6,5 @@ export default defineConfig({
   site: 'https://tienganhevad.com',
   vite: { plugins: [tailwindcss()] },
   // Giới thiệu đã gộp vào trang chủ; giữ link cũ không bị lỗi
-  redirects: { '/gioi-thieu': '/#gioi-thieu' },
+  redirects: { '/gioi-thieu': '/' },
 });

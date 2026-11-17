@@ -5,6 +5,11 @@
   "audience": "Bắt đầu từ số 0",
   "cover": "../../assets/team/team-group.jpg",
   "coverPosition": "center 35%",
+  "video": {
+    "src": "/videos/nen-tang.mp4",
+    "poster": "/videos/nen-tang-poster.webp",
+    "caption": "Xem nhanh khóa học trong 33 giây"
+  },
   "highlights": [
     "Kèm 1-1 với giáo viên",
     "Lộ trình 16 buổi, 2 tháng",

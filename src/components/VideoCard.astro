@@ -1,0 +1,47 @@
+---
+// Video giới thiệu 16:9: hiện ảnh bìa + nút phát, bấm thì phát kèm tiếng và hiện thanh điều khiển
+interface Props {
+  video: { src: string; poster: string; caption?: string };
+  label: string;
+  class?: string;
+}
+const { video, label, class: className } = Astro.props;
+---
+<figure class:list={['video-card relative', className]}>
+  <div class="pointer-events-none absolute -inset-6 -z-10 rounded-[3rem] bg-azure/30 blur-3xl" aria-hidden="true"></div>
+  <div class="relative overflow-hidden rounded-[1.75rem] bg-deep p-1.5 shadow-lift ring-1 ring-white/20">
+    <div class="relative aspect-video overflow-hidden rounded-[1.4rem] bg-deep">
+      <video class="block size-full object-cover" playsinline preload="none" poster={video.poster} data-intro-video>
+        <source src={video.src} type="video/mp4" />
+      </video>
+      <button type="button" data-video-play aria-label={label}
+        class="group absolute inset-0 bg-gradient-to-t from-deep/70 via-transparent to-transparent">
+        <span class="absolute bottom-4 left-4 inline-flex items-center gap-3 rounded-full bg-gold py-2 pl-2 pr-5 text-sm font-extrabold text-deep shadow-lift transition-transform duration-300 group-hover:scale-105 sm:bottom-5 sm:left-5 sm:text-base">
+          <span class="relative grid size-9 place-items-center rounded-full bg-deep text-gold sm:size-10">
+            <span class="absolute inset-0 animate-ping rounded-full bg-deep/30 motion-reduce:hidden" aria-hidden="true"></span>
+            <svg class="relative ml-0.5 size-4 sm:size-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5z" /></svg>
+          </span>
+          Xem video giới thiệu
+        </span>
+      </button>
+    </div>
+  </div>
+  {video.caption && (
+    <figcaption class="mt-4 flex items-center gap-2 text-sm font-bold text-heading/80">
+      <span class="size-2 rounded-full bg-gold" aria-hidden="true"></span>
+      {video.caption}
+    </figcaption>
+  )}
+</figure>
+<script>
+  // Nút phát lớn đè lên video: bấm thì ẩn nút và phát video kèm tiếng
+  document.addEventListener('click', (e) => {
+    const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('[data-video-play]');
+    if (!btn) return;
+    const video = btn.parentElement?.querySelector<HTMLVideoElement>('[data-intro-video]');
+    if (!video) return;
+    btn.hidden = true;
+    video.controls = true;
+    video.play();
+  });
+</script>

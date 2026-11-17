@@ -5,6 +5,11 @@
   "audience": "Nền tảng cơ bản (A1+–A2)",
   "cover": "../../assets/founder/duy-teaching.jpg",
   "coverPosition": "center 25%",
+  "video": {
+    "src": "/videos/cong-viec.mp4",
+    "poster": "/videos/cong-viec-poster.webp",
+    "caption": "Xem nhanh khóa học trong 34 giây"
+  },
   "highlights": [
     "Kèm 1-1 với giáo viên",
     "Lộ trình 2 tháng",

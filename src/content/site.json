@@ -44,5 +44,10 @@
       "suffix": "+",
       "label": "học viên và trainee đã được kèm"
     }
-  ]
+  ],
+  "introVideo": {
+    "src": "/videos/gioi-thieu.mp4",
+    "poster": "/videos/gioi-thieu-poster.webp",
+    "caption": "Evad English trong 40 giây"
+  }
 }

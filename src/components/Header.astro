@@ -4,7 +4,8 @@ import logo from '../assets/evad-logo-dark.png';
 import { ctaHref, ctaExternal, nav } from '../lib';
 
 const path = Astro.url.pathname.replace(/\/$/, '');
-const current = (href: string) => (path === href || path.startsWith(`${href}/`) ? 'page' : undefined);
+const current = (href: string) =>
+  (href === '/' ? path === '' : path === href || path.startsWith(`${href}/`)) ? 'page' : undefined;
 ---
 <!-- h-0: thanh nổi đè lên hero, không chiếm chỗ. Các mục menu nằm cùng thanh với logo; màn hình hẹp thì vuốt ngang. -->
 <header class="sticky top-3 z-30 h-0 px-3 sm:px-5">

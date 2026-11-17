@@ -8,6 +8,7 @@ import Marquee from '../components/Marquee.astro';
 import CourseRow from '../components/CourseRow.astro';
 import CtaBand from '../components/CtaBand.astro';
 import Faq from '../components/Faq.astro';
+import VideoCard from '../components/VideoCard.astro';
 import faq from '../content/faq.json';
 import site from '../content/site.json';
 import { ctaHref, ctaExternal } from '../lib';
@@ -26,13 +27,6 @@ const diffIcons = [
   'M4 5h16l-6 8v5l-4 2v-7L4 5z',
   'M20 12a8 8 0 1 1-2.3-5.6M20 4v4h-4',
   'M7 18c0-3 1-4 2.5-5.5S12 10 12 8a3 3 0 0 0-6 0M15 7a5 5 0 0 1 0 6M18 4a9 9 0 0 1 0 12',
-];
-// Hội thoại minh họa trong khung hero (D: thầy Duy, B: bạn)
-const chat = [
-  { out: false, d: 0.6, text: 'Hi! Hôm nay mình bắt đầu từ đâu nhỉ?' },
-  { out: true, d: 1.8, text: 'Em lâu rồi không nói tiếng Anh, hơi ngại ạ.' },
-  { out: false, d: 3.1, text: 'Không sao. Học 1-1 nên mình đi chậm hay nhanh đều được.' },
-  { out: true, d: 4.4, text: 'Vậy mình thử câu đầu tiên nha!' },
 ];
 const headline = 'Tiếng Anh dùng được ngay, học 1-1 theo nhịp của bạn';
 
@@ -72,17 +66,10 @@ const faqSchema = {
             {headline.split(' ').map((w, i) => <><span class="word" style={`--i:${i}`} aria-hidden="true">{w}</span>{' '}</>)}
           </h1>
 
-          <div class="mt-10 grid gap-10 md:grid-cols-2 md:items-end md:gap-12">
-            <div class="relative flex flex-col gap-3" aria-label="Ví dụ minh họa một đoạn hội thoại trong buổi học">
-              {chat.map((m) => (
-                <div class:list={['msg flex max-w-[90%] items-end gap-2', m.out ? 'flex-row-reverse self-end' : 'self-start']} style={`--d:${m.d}s`}>
-                  <span class:list={['grid size-7 shrink-0 place-items-center rounded-full text-[0.65rem] font-extrabold', m.out ? 'bg-gold text-deep' : 'bg-azure text-white']} aria-hidden="true">{m.out ? 'B' : 'D'}</span>
-                  <p class:list={['bubble !max-w-none', m.out ? 'bubble-out' : 'bubble-in']}>{m.text}</p>
-                </div>
-              ))}
-              <p class="msg self-end pr-9 text-[0.7rem] font-semibold text-ink/55" style="--d:5s">Đã xem ✓✓</p>
-              <p class="text-xs text-ink/55">Hội thoại minh họa</p>
-              <span class="sticker absolute -right-2 -top-6 hidden rotate-6 rounded-2xl bg-gold px-4 py-2 text-sm font-extrabold text-deep shadow-lg sm:block">Giáo viên TESOL ✦</span>
+          <div class="mt-10 grid gap-10 md:grid-cols-[1.15fr_0.85fr] md:items-center md:gap-12">
+            <div class="relative">
+              <VideoCard video={site.introVideo} label="Phát video giới thiệu Evad English" />
+              <span class="sticker absolute -right-2 -top-5 z-10 hidden rotate-6 rounded-2xl bg-gold px-4 py-2 text-sm font-extrabold text-deep shadow-lg sm:block">Tiếng Mỹ thực chiến ✦</span>
             </div>
 
             <div>

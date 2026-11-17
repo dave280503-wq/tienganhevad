@@ -5,6 +5,11 @@
   "audience": "Tự học, có người chỉ đường",
   "cover": "../../assets/software/tong-quan.png",
   "coverPosition": "left top",
+  "video": {
+    "src": "/videos/tu-hoc.mp4",
+    "poster": "/videos/tu-hoc-poster.webp",
+    "caption": "Xem nhanh khóa học trong 35 giây"
+  },
   "highlights": [
     "Tài liệu trên phần mềm học",
     "Bài tập mỗi tuần",
