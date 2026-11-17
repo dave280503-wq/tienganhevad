@@ -5,6 +5,11 @@
   "audience": "Nền tảng cơ bản (A1+–A2)",
   "cover": "../../assets/founder/duy-work.jpg",
   "coverPosition": "70% 40%",
+  "video": {
+    "src": "/videos/noi-hang-ngay.mp4",
+    "poster": "/videos/noi-hang-ngay-poster.webp",
+    "caption": "Xem nhanh khóa học trong 36 giây"
+  },
   "highlights": [
     "Kèm 1-1 với giáo viên",
     "Lộ trình 3 tháng",

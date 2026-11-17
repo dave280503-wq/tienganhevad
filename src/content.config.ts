@@ -12,6 +12,8 @@ const courses = defineCollection({
     // Ảnh chìm ở phần tiêu đề trang chi tiết; coverPosition chỉnh phần ảnh được giữ lại (CSS object-position)
     cover: image().optional(),
     coverPosition: z.string().default('center 30%'),
+    // Video giới thiệu ở đầu trang chi tiết (file trong public/videos)
+    video: z.object({ src: z.string(), poster: z.string(), caption: z.string().default('') }).optional(),
     // Vài điểm nổi bật hiện dưới tiêu đề (không ghi giá ở đây)
     highlights: z.array(z.string()).default([]),
     // session: giá/buổi · week: giá/tuần · contact: liên hệ để biết giá
