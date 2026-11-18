@@ -15,6 +15,7 @@
     "Bài tập mỗi tuần",
     "Có feedback từ giáo viên"
   ],
+  "live": false,
   "priceType": "week",
   "originalPrice": 289000,
   "price": 99000,

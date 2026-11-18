@@ -14,6 +14,8 @@ const courses = defineCollection({
     coverPosition: z.string().default('center 30%'),
     // Video giới thiệu ở đầu trang chi tiết (file trong public/videos)
     video: z.object({ src: z.string(), poster: z.string(), caption: z.string().default('') }).optional(),
+    // true: học trực tiếp 1-1 với giáo viên (phần mềm chỉ hỗ trợ). false: khóa tự học
+    live: z.boolean().default(true),
     // Vài điểm nổi bật hiện dưới tiêu đề (không ghi giá ở đây)
     highlights: z.array(z.string()).default([]),
     // session: giá/buổi · week: giá/tuần · contact: liên hệ để biết giá
